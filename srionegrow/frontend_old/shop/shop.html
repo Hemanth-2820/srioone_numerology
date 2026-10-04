@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shop crystals, malas, healing items and Vaastu tools from SRIONE.">
+  <title>SRIONE Shop - Beyond Calculation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shop.css">
+</head>
+<body>
+  <script>window.location.replace('../index.html#shop');</script>
+  <div class="shop-shell">
+    <header class="shop-header">
+      <div class="header-inner">
+        <a class="brand" href="../index.html"><img src="../srionegrow_logo.png" alt="SRIONE logo"><span>SRIONE</span></a>
+        <div class="header-actions">
+          <a class="back-link" href="../index.html">Back to SRIONE</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="shop-hero">
+        <div class="eyebrow">SRIONE MVP</div>
+        <h1>Our flagship <span>product line.</span></h1>
+        <p class="hero-copy">This is the core SRIONE collection — the MVP of our experience: crystals, malas, sacred objects and Vaastu tools selected to support clarity, balance and the energy of your next move.</p>
+      </section>
+
+      <section class="shop-tools" aria-label="Shop filters">
+        <div class="filters">
+          <button class="filter active" type="button" data-filter="all">All products</button>
+          <button class="filter" type="button" data-filter="stones">Stones</button>
+          <button class="filter" type="button" data-filter="healing">Healing</button>
+          <button class="filter" type="button" data-filter="vastu">Vaastu</button>
+          <button class="filter" type="button" data-filter="accessories">Accessories</button>
+        </div>
+        <input class="search" type="search" placeholder="Search the collection" aria-label="Search products">
+      </section>
+
+      <section class="catalog" id="catalog" aria-live="polite"></section>
+    </main>
+
+    <footer class="shop-footer"><span>© 2026 SRIONE. Beyond Calculation.</span><span>For orders and availability: shop@srione.com</span></footer>
+  </div>
+
+  <script>
+   
+
+    const products = [];
+    const catalog = document.querySelector('#catalog');
+    const search = document.querySelector('.search');
+    const filterButtons = [...document.querySelectorAll('.filter')];
+    const themeToggle = document.querySelector('.theme-toggle');
+    let activeFilter = 'all';
+
+    function applyTheme(theme) {
+      const isLightMode = theme === 'light';
+      document.body.classList.toggle('light-theme', isLightMode);
+      document.body.classList.toggle('dark-theme', !isLightMode);
+      if (themeToggle) {
+        themeToggle.setAttribute('aria-label', isLightMode ? 'Switch to dark theme' : 'Switch to light theme');
+        themeToggle.setAttribute('aria-pressed', String(isLightMode));
+        themeToggle.textContent = isLightMode ? '🌙 Dark' : '☀️ Light';
+      }
+      localStorage.setItem('srione-theme', theme);
+    }
+
+    applyTheme(localStorage.getItem('srione-theme') || 'dark');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        applyTheme(document.body.classList.contains('light-theme') ? 'dark' : 'light');
+      });
+    }
+
+    function renderProducts() {
+      const query = search.value.trim().toLowerCase();
+      const visible = products.filter(product => {
+        const matchesFilter = activeFilter === 'all' || product.category === activeFilter;
+        const matchesSearch = !query || `${product.name} ${product.group}`.toLowerCase().includes(query);
+        return matchesFilter && matchesSearch;
+      });
+      catalog.innerHTML = visible.length ? visible.map(product => `<article class="product"><div class="product-art" aria-hidden="true">${product.icon}</div><div class="category">${product.group}</div><h2>${product.name}</h2><div class="product-bottom"><span class="price">${product.price}</span><button class="enquire" type="button" data-product="${product.name}">Enquire</button></div></article>`).join('') : '<div class="empty">No products match that search.</div>';
+      catalog.querySelectorAll('.enquire').forEach(button => button.addEventListener('click', () => { window.location.href = `mailto:shop@srione.com?subject=Enquiry: ${encodeURIComponent(button.dataset.product)}`; }));
+    }
+
+    filterButtons.forEach(button => button.addEventListener('click', () => { activeFilter = button.dataset.filter; filterButtons.forEach(item => item.classList.toggle('active', item === button)); renderProducts(); }));
+    search.addEventListener('input', renderProducts);
+    renderProducts();
+  </script>
+</body>
+</html>

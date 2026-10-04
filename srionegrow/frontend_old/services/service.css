@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================================================
+  SRIONE SERVICE PAGES DESIGN SYSTEM (Rose Quartz Aesthetic)
+   ========================================================================== */
+:root {
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  --bg-primary: #FFFAFC;
+  --bg-secondary: #FCEFF3;
+  --bg-card: #FFFFFF;
+  --bg-emerald: #FCEFF3;
+
+  --yellow-accent: #C96F89;
+  --yellow-glow: rgba(201, 111, 137, 0.18);
+  --green-accent: #C96F89;
+  --green-glow: rgba(201, 111, 137, 0.18);
+
+  --badge-bg: #F6DDE5;
+  --text-primary: #3C1B24;
+  --text-secondary: #795548;
+  --text-muted: #9E7D88;
+
+  --border-subtle: #E4B6C3;
+  --border-hover: #C96F89;
+  --gradient-signature: linear-gradient(135deg, #D98BA0 0%, #EBC1CE 100%);
+  --gradient-card: linear-gradient(180deg, #FFFFFF 0%, #FFF0F5 100%);
+
+  --radius-sm: 8px;
+  --radius-btn: 12px;
+  --radius-card: 18px;
+  --radius-container: 22px;
+
+  --shadow-card: 0 10px 30px rgba(201, 111, 137, 0.08);
+  --service-accent: #C96F89;
+}
+
+h1, h2, h3, h4, h5, h6,
+.brand span,
+.service-hero h1 {
+  font-family: var(--font-heading);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Service Bespoke Atmospheres */
+body.service-numerology {
+  --service-accent: #C96F89;
+  background-image:
+    radial-gradient(circle at 80% 18%, rgba(246, 221, 229, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 20% 65%, rgba(201, 111, 137, 0.05) 0%, transparent 45%);
+}
+
+body.service-vaastu {
+  --service-accent: #C96F89;
+  background-image:
+    radial-gradient(circle at 80% 18%, rgba(246, 221, 229, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 20% 65%, rgba(201, 111, 137, 0.05) 0%, transparent 45%);
+}
+
+body.service-crystal {
+  --service-accent: #C96F89;
+  background-image:
+    radial-gradient(circle at 80% 18%, rgba(246, 221, 229, 0.35) 0%, transparent 45%),
+    radial-gradient(circle at 20% 65%, rgba(201, 111, 137, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(252, 239, 243, 0.55) 0%, transparent 45%);
+}
+
+.service-page {
+  width: min(1200px, calc(100% - 48px));
+  margin: auto;
+}
+
+/* Service Header */
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 82px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-primary);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  font-size: 1.05rem;
+}
+
+.brand img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(139, 195, 74, 0.35);
+  box-shadow: 0 0 20px rgba(139, 195, 74, 0.28);
+}
+
+.back-link {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--service-accent);
+}
+
+/* Hero */
+.service-hero {
+  padding: 100px 0 64px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--service-accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  background: var(--service-accent);
+}
+
+h1 {
+  max-width: 820px;
+  margin: 22px 0 16px;
+  font-size: clamp(3.2rem, 7.5vw, 5.8rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+}
+
+h1 span {
+  color: var(--service-accent);
+}
+
+.service-crystal h1 span {
+  color: transparent;
+  background: var(--gradient-signature);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.lead {
+  max-width: 680px;
+  color: var(--text-secondary);
+  font-size: 1.12rem;
+  line-height: 1.68;
+  margin: 0;
+}
+
+/* Content Panels */
+.service-content {
+  display: grid;
+  grid-template-columns: 1.25fr 0.85fr;
+  gap: 22px;
+  padding-bottom: 96px;
+}
+
+.panel {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  padding: 38px 34px;
+  background: var(--gradient-card);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.panel h2 {
+  margin: 0 0 16px;
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.panel p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.panel ul {
+  display: grid;
+  gap: 16px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-secondary);
+}
+
+.panel li {
+  padding-left: 28px;
+  position: relative;
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.panel li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--service-accent);
+  content: "✦";
+  font-size: 0.95rem;
+}
+
+/* Consultation Aside Panel */
+.consultation {
+  border-color: rgba(139, 195, 74, 0.3);
+  background: linear-gradient(145deg, rgba(18, 61, 42, 0.45), rgba(17, 20, 17, 0.92));
+}
+
+.service-numerology .consultation {
+  border-color: rgba(244, 211, 94, 0.35);
+  background: linear-gradient(145deg, rgba(244, 211, 94, 0.08), rgba(18, 61, 42, 0.35), #111411);
+}
+
+.consultation h2 {
+  font-size: 1.85rem;
+  margin: 12px 0 14px;
+}
+
+.whatsapp-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 28px;
+  border-radius: var(--radius-btn);
+  color: #070807;
+  background: var(--gradient-signature);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(139, 195, 74, 0.25);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.whatsapp-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 30px rgba(244, 211, 94, 0.35);
+}
+
+/* Service Footer */
+.service-footer {
+  padding: 30px 0;
+  border-top: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 860px) {
+  .service-content {
+    grid-template-columns: 1fr;
+  }
+
+  .service-hero {
+    padding-top: 70px;
+    padding-bottom: 40px;
+  }
+
+  .panel {
+    padding: 30px 24px;
+  }
+}

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SRIONE - Beyond Calculation. Intelligence, reimagined.">
+  <title>SRIONE - BEYOND CALCULATION</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=9">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <nav class="nav-wrap" aria-label="Main navigation">
+        <a class="brand" href="#home" data-route="home"><img src="srionegrow_logo.png" alt="SRIONE logo"><span>SRIONE</span></a>
+        
+        <div class="nav-search" aria-label="Search products">
+          <label class="search-field-wrap" aria-label="Search category">
+            <select class="search-category" aria-label="Select category">
+              <option value="all">All</option>
+              <option value="stones">Stones</option>
+              <option value="bracelets">Bracelets</option>
+              <option value="healing">Healing</option>
+              <option value="vastu">Vaastu</option>
+              <option value="accessories">Accessories</option>
+            </select>
+          </label>
+          <div class="nav-search-main">
+            <input type="text" class="nav-search-input" placeholder="Search crystals, Vaastu, malas..." aria-label="Search products">
+            <div class="search-suggestions" aria-live="polite"></div>
+          </div>
+          <button class="nav-search-btn" type="button" aria-label="Search">⌕</button>
+        </div>
+
+        <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">MENU</button>
+        
+        <div class="nav-links">
+          <a href="#home" data-route="home">Home</a>
+          <a href="#shop" data-route="shop">Shop</a>
+          <a href="#services" data-route="services">Services</a>
+          <a href="#contact" data-route="contact">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+          <button class="cart-btn" id="nav-cart-btn" type="button" aria-label="View Cart">🛒 Cart <span class="cart-badge" id="cart-count">0</span></button>
+          <a class="btn btn-primary" href="#auth" data-route="auth" id="nav-auth-btn">Sign In / Sign Up</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section class="hero route-section" id="home" data-section="home">
+        <video class="hero-video" autoplay muted loop playsinline poster="srionegrow_logo.png"><source src="srione_video.mp4" type="video/mp4"></video>
+        <div class="hero-shade"></div>
+        <div class="blossom-scene" aria-hidden="true">
+          <img src="cherry_blossom.webp" alt="Cherry Blossom" class="blossom-image" />
+          <div class="blossom-glow"></div>
+          <div class="blossom-petals">
+            <span class="petal p1">🌸</span>
+            <span class="petal p2">🌸</span>
+            <span class="petal p3">🌸</span>
+            <span class="petal p4">🌸</span>
+            <span class="petal p5">🌸</span>
+            <span class="petal p6">🌸</span>
+            <span class="petal p7">🌸</span>
+            <span class="petal p8">🌸</span>
+            <span class="petal p9">🌸</span>
+            <span class="petal p10">🌸</span>
+          </div>
+        </div>
+        <div class="hero-content">
+          <div class="eyebrow">Intelligence, reimagined</div>
+          <h1>SRIONE<br><span class="hero-highlight">Beyond <span class="highlight-yellow">Calculation</span></span></h1>
+          <p class="hero-copy">We build intelligent systems for ideas that do not fit inside ordinary limits. Enter a new dimension of strategy, technology and human possibility.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#shop" data-route="shop">Explore collection</a>
+            <a class="btn" href="#services" data-route="services">Our services</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section route-section shop-page" id="shop" data-section="shop">
+        <div class="shop-hero">
+          <div class="eyebrow">SRIONE Beyond Calculation</div>
+          <h1>Curated energy for <span>the next move.</span></h1>
+          <p class="hero-copy">SRIONE Beyond Calculation brings together crystals, malas, sacred objects and Vaastu tools designed to support clarity, balance and a more aligned life.</p>
+        </div>
+
+        <div class="shop-tools" aria-label="Shop filters">
+          <div class="filters">
+            <button class="filter active" type="button" data-filter="all">All products</button>
+            <button class="filter" type="button" data-filter="stones">Stones</button>
+            <button class="filter" type="button" data-filter="healing">Healing</button>
+            <button class="filter" type="button" data-filter="vastu">Vaastu</button>
+            <button class="filter" type="button" data-filter="accessories">Accessories</button>
+          </div>
+        </div>
+
+        <div class="catalog" id="catalog" aria-live="polite"></div>
+      </section>
+
+      <!-- DEDICATED PRODUCT DETAIL VIEW -->
+      <section class="section route-section product-detail-page" id="product-detail" data-section="product-detail" style="display:none;">
+        <a class="back-link" href="#shop" id="back-to-shop-btn">← Back to Shop</a>
+        <div class="product-detail-grid">
+          <div class="product-image-container">
+            <img class="product-large-image" id="detail-product-image" alt="">
+            <div class="product-large-icon" id="detail-product-icon">✦</div>
+          </div>
+          <div class="product-info-panel">
+            <div class="eyebrow" id="detail-product-group">SRIONE / STONES</div>
+            <h1 class="product-title" id="detail-product-name">Amethyst</h1>
+            <div class="product-price-tag">
+              <span class="price-original" id="detail-original-price"></span>
+              <span class="price-amount" id="detail-product-price">₹170</span>
+              <span class="price-badge">50% OFF</span>
+              <span class="price-badge">Certified Energy</span>
+              <span class="free-gift-badge" id="detail-free-gift" hidden>Free Selenite Plate</span>
+            </div>
+            <p class="product-description-text" id="detail-product-desc">
+              Renowned for its calming frequency, Amethyst aids in mental clarity, deep intuition, and peaceful meditation.
+            </p>
+
+            <div class="product-specs-list">
+              <div class="spec-item">
+                <span class="spec-label">Category</span>
+                <span class="spec-val" id="detail-spec-category">Stones</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Authenticity</span>
+                <span class="spec-val">100% Genuine</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Energy Focus</span>
+                <span class="spec-val">Clarity & Balance</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Availability</span>
+                <span class="spec-val" style="color:var(--green-accent)">In Stock</span>
+              </div>
+            </div>
+
+            <div class="rashi-selection" id="rashi-selection" hidden>
+              <div class="rashi-selection-heading">
+                <span class="spec-label">Choose your Rashi</span>
+                <span class="rashi-selection-note">12 zodiac energies</span>
+              </div>
+              <div class="rashi-grid" id="rashi-grid"></div>
+            </div>
+
+            <div class="product-action-group">
+              <button class="btn btn-primary btn-buy-now" id="detail-buy-now" type="button">Buy Now</button>
+              <button class="btn btn-add-cart" id="detail-add-cart" type="button">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section route-section" id="services" data-section="services">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">What we make</div>
+            <h2>Built for the next move.</h2>
+          </div>
+          <p>Focused services for brands and teams navigating a world that is changing shape.</p>
+        </div>
+        <div class="services-grid">
+          <a class="glass-card service-card service-link service-numerology" href="services/numerology.html">
+            <div class="service-mark">∞</div>
+            <h3>Numerology</h3>
+            <p>Explore the patterns and meanings held in numbers to bring clarity to your path.</p>
+            <span class="service-cta">Explore service <span aria-hidden="true">↗</span></span>
+          </a>
+          <a class="glass-card service-card service-link service-vaastu" href="services/vaastu.html">
+            <div class="service-mark">⌂</div>
+            <h3>Vaastu</h3>
+            <p>Shape balanced spaces that support harmony, intention and positive energy.</p>
+            <span class="service-cta">Explore service <span aria-hidden="true">↗</span></span>
+          </a>
+          <a class="glass-card service-card service-link service-crystal" href="services/crystal-healing.html">
+            <div class="service-mark">◇</div>
+            <h3>Crystal Healing</h3>
+            <p>Reconnect with calm, focus and grounded energy through intentional crystal work.</p>
+            <span class="service-cta">Explore service <span aria-hidden="true">↗</span></span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section contact-band route-section" id="contact" data-section="contact">
+        <div>
+          <div class="eyebrow">Open channel</div>
+          <h2>Let’s make the next dimension tangible.</h2>
+          <p>Bring us the question you are still shaping. We will bring a sharper way to see it.</p>
+        </div>
+        <a class="btn btn-primary" href="mailto:hello@srione.com">Contact SRIONE</a>
+      </section>
+    </main>
+
+    <!-- UNIFIED AUTH SECTION (SIGN IN & SIGN UP) -->
+    <section class="auth-view" id="auth" data-auth="auth">
+      <div class="glass-card auth-panel">
+        <a class="back-link" href="#home">← Back to SRIONE</a>
+
+        <div class="auth-tabs" role="tablist">
+          <button type="button" class="auth-tab active" id="tab-signin-btn" data-auth-tab="signin">Sign In</button>
+          <button type="button" class="auth-tab" id="tab-signup-btn" data-auth-tab="signup">Sign Up</button>
+        </div>
+
+        <!-- SIGN IN FORM -->
+        <form class="auth-form" id="form-signin" data-form="signin">
+          <div class="eyebrow">Welcome back</div>
+          <h1>Sign in.</h1>
+          <p>Return to your SRIONE space.</p>
+
+          <label class="field">Email
+            <input type="email" required placeholder="you@example.com" id="signin-email">
+          </label>
+          <label class="field">Password
+            <input type="password" required placeholder="Your password" id="signin-password">
+          </label>
+
+          <button class="btn btn-primary" type="submit">Enter your space</button>
+          <div class="auth-switch">New to SRIONE? <a href="#signup" id="link-to-signup">Create an account</a></div>
+        </form>
+
+        <!-- SIGN UP FORM (FIRST TIME JOIN) -->
+        <form class="auth-form" id="form-signup" data-form="signup" style="display:none;">
+          <div class="eyebrow">Begin the journey</div>
+          <h1>Sign up.</h1>
+          <p>Create your place in the next dimension.</p>
+
+          <label class="field">1) Name
+            <input type="text" required placeholder="Your full name" id="signup-name">
+          </label>
+
+          <label class="field">2) Email
+            <input type="email" required placeholder="you@example.com" id="signup-email">
+          </label>
+
+          <label class="field">3) Phone Number
+            <input type="tel" required placeholder="+91 98765 43210" id="signup-phone">
+          </label>
+
+          <div class="field-row">
+            <label class="field">4) Date of Birth
+              <input type="date" required id="signup-dob">
+            </label>
+            <label class="field">5) Time of Birth <small class="opt-label">(Optional)</small>
+              <input type="time" id="signup-tob">
+            </label>
+          </div>
+
+          <label class="field">6) Create Password
+            <input type="password" required placeholder="Create a strong password" id="signup-password">
+          </label>
+
+          <button class="btn btn-primary" type="submit">Create account</button>
+          <div class="auth-switch">Already with us? <a href="#signin" id="link-to-signin">Sign in</a></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- CART MODAL DRAWER -->
+    <div class="cart-modal" id="cart-modal">
+      <div class="cart-drawer">
+        <div class="cart-header">
+          <h2>Your Energy Cart</h2>
+          <button class="cart-close" id="cart-close-btn" type="button">✕</button>
+        </div>
+        <div class="cart-items-list" id="cart-items-container">
+          <div class="empty">Your cart is empty.</div>
+        </div>
+        <div class="cart-footer">
+          <div class="cart-total-row">
+            <span>Total:</span>
+            <span id="cart-total-price">₹0</span>
+          </div>
+          <button class="btn btn-primary" id="cart-checkout-btn" type="button" style="width:100%;">Proceed to Order</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-brand">
+        <a class="brand" href="#home"><img src="srionegrow_logo.png" alt="SRIONE logo"><span>SRIONE</span></a>
+        <p>Beyond Calculation.</p>
+        <p class="footer-note">Intelligence for the next dimension.</p>
+      </div>
+      <div class="footer-column">
+        <h3>Explore</h3>
+        <a href="#home">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#services">Services</a>
+      </div>
+      <div class="footer-column">
+        <h3>Services</h3>
+        <a href="services/numerology.html">Numerology</a>
+        <a href="services/vaastu.html">Vaastu</a>
+        <a href="services/crystal-healing.html">Crystal Healing</a>
+      </div>
+      <div class="footer-column">
+        <h3>Contact</h3>
+        <a href="mailto:hello@srione.com">hello@srione.com</a>
+        <a href="tel:+919705131915">+91 97051 31915</a>
+        <a href="https://wa.me/919705131915" target="_blank" rel="noopener">WhatsApp us</a>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 SRIONE. All rights reserved.</span>
+        <span>Made for unusual minds.</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="products.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
