@@ -73,7 +73,7 @@
   --gradient-signature: var(--color-saffron);
   --gradient-emerald: var(--color-light-green);
   --gradient-card: var(--color-pista);
-  --gradient-card-hover: var(--color-lemon);
+  --gradient-card-hover: var(--color-pista); /* Removed yellow hover as requested */
 
   --radius-sm: 8px;
   --radius-btn: 12px;
@@ -230,6 +230,10 @@ button {
 
    ========================================================================== */
 
+#main-content {
+  padding-top: 75px;
+}
+
 .topbar {
 
   position: fixed;
@@ -251,10 +255,30 @@ button {
   border-bottom: 1px solid var(--border-subtle);
 
   transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-
 }
 
+.topbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 40px;
+}
 
+.topbar-nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  font-weight: 600;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 
 .nav-wrap {
 
@@ -2071,33 +2095,22 @@ button {
 
 
 .product:hover {
-
-  transform: translateY(-4px);
-
+  transform: translateY(-6px);
   border-color: var(--border-hover);
-
-  box-shadow: none;
-
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* Added subtle shadow instead of color change */
   background: var(--gradient-card-hover);
-
 }
 
 
 
 .product-art {
-
   display: grid;
-
   place-items: center;
-
-  width: 160px;
-
-  height: 160px;
-
+  width: 100%;
+  aspect-ratio: 1/1;
+  height: auto;
   margin-bottom: 18px;
-
   border: 1px solid var(--border-subtle);
-
   border-radius: 14px;
 
   color: #111111;
@@ -4195,19 +4208,19 @@ body.light-theme .field input[type="time"] {
 .num.n6 { left: 25%; animation-duration: 20s; animation-delay: 12s; font-size: 2.5rem; }
 
 .hero h1 {
-  color: #111111 !important;
+  color: #ffffff;
 }
 
 .hero .hero-copy {
-  color: #222222 !important;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .hero h1 span.hero-highlight {
-  color: #111111 !important;
+  color: #ffffff;
 }
 
 .hero h1 span.highlight-yellow {
-  color: var(--accent-primary) !important;
+  color: var(--color-saffron);
 }
 
 .hero .btn:not(.btn-primary) {
@@ -4226,3 +4239,173 @@ body.light-theme .field input[type="time"] {
 
 /* Force dark text on buttons */
 .btn, .btn-primary, .whatsapp-button { color: #111111 !important; }
+
+/* ==========================================================================
+   MOBILE RESPONSIVENESS OVERRIDES
+   ========================================================================== */
+
+/* Grid Helpers */
+.grid-responsive-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+@media (max-width: 768px) {
+  /* Layout adjustments */
+  .grid-responsive-2col {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .section {
+    padding: 60px 16px;
+  }
+  
+  /* Navbar */
+  .topbar-nav {
+    display: none; /* Hidden by default on mobile, can be toggled */
+  }
+  
+  .topbar-nav.mobile-active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: var(--bg-primary);
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    z-index: 1000;
+  }
+  
+  .mobile-menu-btn {
+    display: block !important;
+  }
+  
+  .topbar-actions {
+    gap: 10px;
+  }
+  
+  .auth-btn {
+    display: none !important; /* Hide 'Sign In / Sign Up' text on mobile, keep Cart */
+  }
+
+  /* Catalog Grid */
+  .catalog {
+    grid-template-columns: 1fr; /* 1 column on mobile */
+  }
+
+  /* Footer */
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .footer-bottom > div {
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Hero adjustments */
+  h1 {
+    font-size: clamp(2rem, 8vw, 3rem) !important;
+  }
+  
+  .hero {
+    padding-top: 120px;
+    min-height: auto;
+  }
+  
+  .hero-content {
+    padding: 20px;
+  }
+}
+
+/* ==========================================================================
+   TYPOGRAPHY AND CONTENT ENRICHMENT FIXES
+   ========================================================================== */
+
+html {
+  font-size: 16px; /* Revert back to 16px to prevent layout scaling issues */
+}
+
+h1, h2, h3, h4, h5, h6, .hero h1, .section-heading h2, .panel h2, .auth-title {
+  font-family: var(--font-heading) !important;
+  font-weight: 700;
+}
+
+p, .lead, .product-description-text {
+  font-family: var(--font-body);
+  font-size: 1.1rem !important; /* Force readable paragraph sizes globally */
+  line-height: 1.8;
+  color: var(--text-secondary);
+  margin-bottom: 1.2rem;
+}
+
+li {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 0.8rem;
+}
+
+.service-content .panel {
+  padding: 40px;
+}
+
+/* ==========================================================================
+   PREMIUM SERVICE CARDS (HOME PAGE)
+   ========================================================================== */
+.premium-service-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  padding: 40px;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  height: 100%;
+}
+
+.premium-service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+  border-color: #111;
+}
+
+.premium-service-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  color: #111;
+  transition: transform 0.3s ease;
+}
+
+.premium-service-card:hover .premium-service-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.premium-service-cta {
+  margin-top: 30px;
+  font-weight: 700;
+  color: #111;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.05rem;
+}
+
+.premium-service-cta .arrow {
+  transition: transform 0.3s ease;
+}
+
+.premium-service-card:hover .premium-service-cta .arrow {
+  transform: translateX(8px);
+}

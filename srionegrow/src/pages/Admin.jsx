@@ -8,6 +8,8 @@ export default function Admin() {
   const [activeTab, setActiveTab] = useState('products');
   const [products, setProducts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [services, setServices] = useState([]);
+  const [serviceForm, setServiceForm] = useState({ name: '', mark: '', description: '', link: '/contact', css_class: 'service-numerology' });
   
   const [formData, setFormData] = useState({ name: '', category: 'Stones', price: '' });
   const [imageFile, setImageFile] = useState(null);
@@ -29,7 +31,7 @@ export default function Admin() {
       }
     } catch (err) {
       // Fallback for local testing if PHP isn't running
-      if (password === 'admin123') {
+      if (password === 'srione@2026') {
         setIsAuthenticated(true);
         fetchData();
       } else {
@@ -43,6 +45,9 @@ export default function Admin() {
       const pRes = await fetch(`${API_URL}/products.php`);
       if(pRes.ok) setProducts(await pRes.json());
       
+      const sRes = await fetch(`${API_URL}/services.php`);
+      if(sRes.ok) setServices(await sRes.json());
+
       const uRes = await fetch(`${API_URL}/users.php`);
       if(uRes.ok) setUsers(await uRes.json());
     } catch (err) {
@@ -52,6 +57,27 @@ export default function Admin() {
         { id: 2, name: 'Citrine Bracelet', category: 'Bracelets', price: '8500' }
       ]);
       setUsers([{ id: 1, name: 'Admin', email: 'admin@srione.com', created_at: 'Today' }]);
+      setServices([{ id: 1, name: 'Sample Service', mark: '✧', description: 'This is a sample service.', link: '/contact' }]);
+    }
+  };
+
+  
+  const handleUploadService = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${API_URL}/services.php`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(serviceForm)
+      });
+      const result = await res.json();
+      if(result.success) {
+        alert('Service added!');
+        fetchData();
+        setServiceForm({ name: '', mark: '', description: '', link: '/contact', css_class: 'service-numerology' });
+      }
+    } catch (err) {
+      alert('Mock Service Add Success! (PHP not connected)');
     }
   };
 
@@ -98,6 +124,7 @@ export default function Admin() {
 
       <div style={{ display: 'flex', gap: '12px', marginBottom: '30px', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '16px' }}>
         <button onClick={() => setActiveTab('products')} style={{ padding: '8px 16px', background: activeTab === 'products' ? 'var(--bg-surface-active)' : 'transparent', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-sm)', fontWeight: '800', cursor: 'pointer' }}>Manage Products</button>
+        <button onClick={() => setActiveTab('services')} style={{ padding: '8px 16px', background: activeTab === 'services' ? 'var(--bg-surface-active)' : 'transparent', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-sm)', fontWeight: '800', cursor: 'pointer' }}>Manage Services</button>
         <button onClick={() => setActiveTab('users')} style={{ padding: '8px 16px', background: activeTab === 'users' ? 'var(--bg-surface-active)' : 'transparent', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-sm)', fontWeight: '800', cursor: 'pointer' }}>View Users</button>
       </div>
 
@@ -108,11 +135,14 @@ export default function Admin() {
             <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Product Name</label>
             <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }} />
             <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Category</label>
-            <select value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }}>
-              <option value="Stones">Stones</option>
-              <option value="Bracelets">Bracelets</option>
-              <option value="Healing">Healing</option>
-            </select>
+            <input list="category-options" required value={formData.category} onChange={e => setFormData({...formData, category: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }} placeholder="Type a category..." />
+            <datalist id="category-options">
+              <option value="Stones" />
+              <option value="Bracelets" />
+              <option value="Healing" />
+              <option value="Accessories" />
+              <option value="Vaastu" />
+            </datalist>
             <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Price (e.g. 4500)</label>
             <input type="number" required value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }} />
             <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Product Image</label>
@@ -138,6 +168,57 @@ export default function Admin() {
                     <td style={{ padding: '12px', fontWeight: '800' }}>{p.name}</td>
                     <td style={{ padding: '12px' }}>{p.category}</td>
                     <td style={{ padding: '12px' }}>₹{p.price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      
+      {activeTab === 'services' && (
+        <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '40px' }}>
+          <form onSubmit={handleUploadService} style={{ background: 'var(--bg-card)', padding: '24px', borderRadius: 'var(--radius-card)', border: '1px solid var(--border-subtle)', alignSelf: 'start' }}>
+            <h3>Add New Service</h3>
+            <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Service Name</label>
+            <input type="text" required value={serviceForm.name} onChange={e => setServiceForm({...serviceForm, name: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }} />
+            
+            <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Icon / Emoji (e.g. 📱, ✧)</label>
+            <input type="text" required value={serviceForm.mark} onChange={e => setServiceForm({...serviceForm, mark: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }} />
+            
+            <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Description</label>
+            <textarea required value={serviceForm.description} onChange={e => setServiceForm({...serviceForm, description: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)', minHeight: '80px' }} />
+            
+            <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Link URL</label>
+            <input type="text" value={serviceForm.link} onChange={e => setServiceForm({...serviceForm, link: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }} />
+            
+            <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Color Theme</label>
+            <select value={serviceForm.css_class} onChange={e => setServiceForm({...serviceForm, css_class: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }}>
+              <option value="service-numerology">Yellow / Saffron (Numerology)</option>
+              <option value="service-vaastu">Green (Vaastu)</option>
+              <option value="service-crystal">Yellow + Green (Crystal)</option>
+            </select>
+            
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '24px' }}>Add Service</button>
+          </form>
+
+          <div>
+            <h3>Current Services</h3>
+            <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '16px', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-card)', overflow: 'hidden' }}>
+              <thead>
+                <tr style={{ background: 'var(--border-subtle)', color: 'var(--bg-primary)' }}>
+                  <th style={{ padding: '12px', textAlign: 'left' }}>Icon</th>
+                  <th style={{ padding: '12px', textAlign: 'left' }}>Name</th>
+                  <th style={{ padding: '12px', textAlign: 'left' }}>Link</th>
+                </tr>
+              </thead>
+              <tbody>
+                {services.map(s => (
+                  <tr key={s.id} style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                    <td style={{ padding: '12px', fontSize: '1.5rem' }}>{s.mark}</td>
+                    <td style={{ padding: '12px', fontWeight: '800' }}>{s.name}</td>
+                    <td style={{ padding: '12px' }}>{s.link}</td>
                   </tr>
                 ))}
               </tbody>

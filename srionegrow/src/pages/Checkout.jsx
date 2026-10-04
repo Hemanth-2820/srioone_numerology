@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
+import { API_URL } from '../config';
 
 const loadRazorpayScript = () => {
   return new Promise((resolve) => {
@@ -16,6 +17,30 @@ export default function Checkout() {
   const { cartTotal, clearCart } = useCart();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  
+  const user = JSON.parse(localStorage.getItem('srione_user'));
+
+  useEffect(() => {
+    if (user) {
+      setFormData(prev => ({ ...prev, name: user.name, email: user.email }));
+      
+      // Fetch saved address
+      fetch(`${API_URL}/profile.php?user_id=${user.id}`)
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.user) {
+            setFormData(prev => ({
+              ...prev,
+              address: data.user.address || prev.address,
+              city: data.user.city || prev.city,
+              postalCode: data.user.zip || prev.postalCode
+            }));
+          }
+        })
+        .catch(err => console.error("Could not fetch address", err));
+    }
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -50,13 +75,24 @@ export default function Checkout() {
       name: 'SRIONE',
       description: 'Order Payment',
       image: '/srionegrow_logo.png', // Optional logo
+
       handler: function (response) {
-        // Payment successful
         console.log('Payment ID:', response.razorpay_payment_id);
+        
+        // Save order to database
+        if (user) {
+          fetch(`${API_URL}/profile.php`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'create_order', user_id: user.id, amount: cartTotal })
+          }).catch(err => console.error("Could not save order", err));
+        }
+
         clearCart();
         setSubmitted(true);
         setLoading(false);
       },
+
       prefill: {
         name: formData.name,
         email: formData.email,

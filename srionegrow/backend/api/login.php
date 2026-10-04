@@ -7,7 +7,7 @@ $data = json_decode(file_get_contents("php://input"));
 $password = $data->password ?? '';
 
 // Default admin password (change this!)
-if ($password === 'admin123') {
+if ($password === 'srione@2026') {
     echo json_encode(['success' => true, 'token' => 'secure-admin-token']);
 } else {
     echo json_encode(['success' => false, 'message' => 'Invalid password']);

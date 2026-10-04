@@ -21,12 +21,12 @@ export default function Home() {
           <span className="num n6">∞</span>
         </div>
         <div className="hero-content">
-          <div className="eyebrow">Intelligence, reimagined</div>
-          <h1>SRIONE<br /><span className="hero-highlight">Beyond <span className="highlight-yellow">Calculation</span></span></h1>
-          <p className="hero-copy">We build intelligent systems for ideas that do not fit inside ordinary limits. Enter a new dimension of strategy, technology and human possibility.</p>
+          <div className="eyebrow" style={{ color: 'rgba(255,255,255,0.8)', borderColor: 'rgba(255,255,255,0.3)' }}>Numerology, Vaastu & Crystals</div>
+          <h1 style={{ color: '#ffffff', textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>SRIONE<br /><span className="hero-highlight">Your Cosmic <span className="highlight-yellow" style={{ color: 'var(--color-saffron)' }}>Blueprint</span></span></h1>
+          <p className="hero-copy" style={{ color: 'rgba(255, 255, 255, 0.9)', textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>Unlock the hidden potential of your destiny. Explore transformative consultations and precision-crafted crystals to align your space, spirit, and future.</p>
           <div className="hero-actions">
             <Link className="btn btn-primary" to="/shop">Explore collection</Link>
-            <Link className="btn" to="/services">Our services</Link>
+            <Link className="btn" to="/services" style={{ color: '#fff', borderColor: 'rgba(255,255,255,0.4)' }}>Our services</Link>
           </div>
         </div>
       </section>
@@ -64,36 +64,48 @@ export default function Home() {
       </section>
 
       {/* Services Teaser Section */}
-      <section style={{ background: 'var(--gradient-card)', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
-        <div style={{ padding: '100px 24px', maxWidth: '1200px', margin: '0 auto' }}>
-          <div className="section-heading" style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <div className="eyebrow" style={{ justifyContent: 'center' }}>What we make</div>
-            <h2 style={{ color: 'var(--text-primary)', fontSize: '2.5rem', marginBottom: '16px' }}>Expertise & Practices.</h2>
-            <p style={{ color: 'var(--text-secondary)' }}>Focused services for brands and teams navigating a world that is changing shape.</p>
+      <section style={{ background: 'var(--bg-secondary)', padding: '120px 24px', borderTop: '1px solid var(--border-subtle)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          
+          <div style={{ textAlign: 'center', marginBottom: '80px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div className="eyebrow" style={{ justifyContent: 'center', color: 'var(--color-saffron)' }}>Discover Your Path</div>
+            <h2 style={{ color: 'var(--text-primary)', fontSize: '3rem', marginBottom: '20px', fontFamily: 'var(--font-heading)' }}>Expertise & Practices.</h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px' }}>Transformative consultations to align your space, spirit, and destiny. We guide you beyond the physical.</p>
           </div>
           
-          <div className="services-grid">
-            <Link className="glass-card service-card service-link service-numerology" to="/services/numerology" style={{ textDecoration: 'none' }}>
-              <div className="service-mark">∞</div>
-              <h3>Numerology</h3>
-              <p>Explore the patterns and meanings held in numbers to bring clarity to your path.</p>
-              <span className="service-cta">Explore service <span aria-hidden="true">↗</span></span>
+          <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
+            
+            <Link className="premium-service-card" to="/services/numerology" style={{ textDecoration: 'none' }}>
+              <div className="premium-service-icon" style={{ background: 'var(--color-lemon)' }}>
+                <span style={{ fontSize: '2rem' }}>∞</span>
+              </div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--text-primary)' }}>Numerology</h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6', flexGrow: 1 }}>Decode the cosmic blueprint hidden in your numbers. Gain absolute clarity on your life path, career timing, and personal relationships.</p>
+              <div className="premium-service-cta">Explore Numerology <span className="arrow">→</span></div>
             </Link>
-            <Link className="glass-card service-card service-link service-vaastu" to="/services/vaastu" style={{ textDecoration: 'none' }}>
-              <div className="service-mark">⌂</div>
-              <h3>Vaastu</h3>
-              <p>Shape balanced spaces that support harmony, intention and positive energy.</p>
-              <span className="service-cta">Explore service <span aria-hidden="true">↗</span></span>
+
+            <Link className="premium-service-card" to="/services/vaastu" style={{ textDecoration: 'none' }}>
+              <div className="premium-service-icon" style={{ background: 'var(--color-pista)' }}>
+                <span style={{ fontSize: '2rem' }}>⌂</span>
+              </div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--text-primary)' }}>Vaastu Shastra</h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6', flexGrow: 1 }}>Harmonize your living and working spaces. We optimize the flow of natural energy to attract abundance, health, and profound peace.</p>
+              <div className="premium-service-cta">Explore Vaastu <span className="arrow">→</span></div>
             </Link>
-            <Link className="glass-card service-card service-link service-crystal" to="/services/crystal-healing" style={{ textDecoration: 'none' }}>
-              <div className="service-mark">◇</div>
-              <h3>Crystal Healing</h3>
-              <p>Reconnect with calm, focus and grounded energy through intentional crystal work.</p>
-              <span className="service-cta">Explore service <span aria-hidden="true">↗</span></span>
+
+            <Link className="premium-service-card" to="/services/crystal-healing" style={{ textDecoration: 'none' }}>
+              <div className="premium-service-icon" style={{ background: 'var(--color-light-peach)' }}>
+                <span style={{ fontSize: '2rem' }}>◇</span>
+              </div>
+              <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--text-primary)' }}>Crystal Healing</h3>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6', flexGrow: 1 }}>Restore your internal vibration. Cleanse your aura and balance your chakras using the ancient, stable frequencies of natural Earth crystals.</p>
+              <div className="premium-service-cta">Explore Crystal Healing <span className="arrow">→</span></div>
             </Link>
+
           </div>
-          <div style={{ textAlign: 'center', marginTop: '60px' }}>
-            <Link className="btn btn-primary" to="/services">Explore All Services</Link>
+          
+          <div style={{ textAlign: 'center', marginTop: '80px' }}>
+            <Link className="btn btn-primary" to="/services" style={{ padding: '16px 40px', fontSize: '1.1rem' }}>View All Consultations</Link>
           </div>
         </div>
       </section>

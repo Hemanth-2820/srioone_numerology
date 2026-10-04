@@ -17,3 +17,33 @@ CREATE TABLE IF NOT EXISTS products (
 
 -- Insert dummy data for demo
 INSERT INTO users (name, email) VALUES ('Admin User', 'admin@srione.com');
+
+-- Added Services Table
+CREATE TABLE IF NOT EXISTS services (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    mark VARCHAR(50) NOT NULL,
+    description TEXT NOT NULL,
+    link VARCHAR(255) DEFAULT '/contact',
+    css_class VARCHAR(50) DEFAULT 'service-numerology',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Ensure users table has a password field for authentication
+ALTER TABLE users ADD COLUMN IF NOT EXISTS password VARCHAR(255) NOT NULL AFTER email;
+
+-- User Addresses
+ALTER TABLE users ADD COLUMN IF NOT EXISTS address TEXT DEFAULT NULL;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS city VARCHAR(100) DEFAULT NULL;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS state VARCHAR(100) DEFAULT NULL;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS zip VARCHAR(20) DEFAULT NULL;
+
+-- Orders Table
+CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    status VARCHAR(50) DEFAULT 'Pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
