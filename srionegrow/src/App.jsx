@@ -13,7 +13,7 @@ import Auth from './pages/Auth';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Admin from './pages/Admin';
-import Profile from './pages/Admin';
+import Profile from './pages/Profile';
 
 import { CartProvider } from './context/CartContext';
 
@@ -31,7 +31,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/services/numerology" element={<Numerology />} />
             <Route path="/services/vaastu" element={<Vaastu />} />
-            <Route path="/services/crystal-healing" element={<CrystalHealing />} />
+            <Route path="/services/crystal-balancing" element={<CrystalHealing />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/profile" element={<Profile />} />

@@ -1,7 +1,19 @@
 import { Link } from 'react-router-dom';
 import { products } from '../data/products';
 
+import { useState, useEffect } from 'react';
+import { API_URL } from '../config';
+
 export default function Home() {
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API_URL}/services.php`)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.length > 0) setServices(data.slice(0, 3));
+      });
+  }, []);
   const featuredProducts = products.slice(0, 3); // Take first 3 for the home page
 
   return (
@@ -74,34 +86,22 @@ export default function Home() {
           </div>
           
           <div className="services-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
-            
-            <Link className="premium-service-card" to="/services/numerology" style={{ textDecoration: 'none' }}>
-              <div className="premium-service-icon" style={{ background: 'var(--color-lemon)' }}>
-                <span style={{ fontSize: '2rem' }}>∞</span>
-              </div>
-              <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--text-primary)' }}>Numerology</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6', flexGrow: 1 }}>Decode the cosmic blueprint hidden in your numbers. Gain absolute clarity on your life path, career timing, and personal relationships.</p>
-              <div className="premium-service-cta">Explore Numerology <span className="arrow">→</span></div>
-            </Link>
-
-            <Link className="premium-service-card" to="/services/vaastu" style={{ textDecoration: 'none' }}>
-              <div className="premium-service-icon" style={{ background: 'var(--color-pista)' }}>
-                <span style={{ fontSize: '2rem' }}>⌂</span>
-              </div>
-              <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--text-primary)' }}>Vaastu Shastra</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6', flexGrow: 1 }}>Harmonize your living and working spaces. We optimize the flow of natural energy to attract abundance, health, and profound peace.</p>
-              <div className="premium-service-cta">Explore Vaastu <span className="arrow">→</span></div>
-            </Link>
-
-            <Link className="premium-service-card" to="/services/crystal-healing" style={{ textDecoration: 'none' }}>
-              <div className="premium-service-icon" style={{ background: 'var(--color-light-peach)' }}>
-                <span style={{ fontSize: '2rem' }}>◇</span>
-              </div>
-              <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--text-primary)' }}>Crystal Healing</h3>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6', flexGrow: 1 }}>Restore your internal vibration. Cleanse your aura and balance your chakras using the ancient, stable frequencies of natural Earth crystals.</p>
-              <div className="premium-service-cta">Explore Crystal Healing <span className="arrow">→</span></div>
-            </Link>
-
+            {services.length > 0 ? services.map(s => (
+              <Link key={s.id} className="premium-service-card" to={s.link} style={{ textDecoration: 'none' }}>
+                {s.image_url ? (
+                  <img src={`${API_URL.replace('/api', '')}/${s.image_url}`} alt={s.name} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: 'var(--radius-sm)' }} />
+                ) : (
+                  <div className={`premium-service-icon ${s.css_class}`} style={{ background: 'var(--bg-secondary)' }}>
+                    <span style={{ fontSize: '2rem' }}>{s.mark}</span>
+                  </div>
+                )}
+                <h3 style={{ fontSize: '1.8rem', marginBottom: '15px', color: 'var(--text-primary)' }}>{s.name}</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: '1.6', flexGrow: 1 }}>{s.description}</p>
+                <div className="premium-service-cta">Explore {s.name} <span className="arrow">→</span></div>
+              </Link>
+            )) : (
+              <div style={{ textAlign: 'center', gridColumn: '1 / -1' }}>Loading featured services...</div>
+            )}
           </div>
           
           <div style={{ textAlign: 'center', marginTop: '80px' }}>

@@ -11,7 +11,7 @@ export default function Numerology() {
         <section className="service-hero">
           <div className="eyebrow">SRIONE / Numerology</div>
           <h1>Unlock Your <span>Cosmic Blueprint.</span></h1>
-          <p className="lead">Numerology is the ancient science of numbers. By analyzing the numbers hidden within your birth date and name, we decode the energetic patterns shaping your life, empowering you to make decisions with absolute clarity and confidence.</p>
+          <p className="lead">Numerology is the ancient science of numbers. By analyzing the numbers hidden within your birth date and name, we decode the harmonious patterns shaping your life, empowering you to make decisions with absolute clarity and confidence.</p>
         </section>
         <section className="service-content">
           <article className="panel">
@@ -22,7 +22,7 @@ export default function Numerology() {
             <ul>
               <li><strong>Life Path Number:</strong> Uncover the core mission you were born to fulfill.</li>
               <li><strong>Destiny & Expression:</strong> Learn how the world perceives you and how to communicate your truth.</li>
-              <li><strong>Personal Year Cycles:</strong> Understand the current energetic weather of your life to time major moves perfectly.</li>
+              <li><strong>Personal Year Cycles:</strong> Understand the current harmonious weather of your life to time major moves perfectly.</li>
               <li><strong>Name Correction Guidance:</strong> Align your name's vibration with success and harmony.</li>
             </ul>
             <p>Whether you are facing a crossroads in your career, seeking harmony in relationships, or simply wanting to understand yourself better, our Numerology sessions provide the actionable insights you need.</p>

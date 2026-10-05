@@ -21,6 +21,7 @@ export default function Shop() {
              rawPrice: parseFloat(p.price),
              price: p.price.toString().startsWith('₹') || p.price.toString().startsWith('$') ? p.price : `₹${p.price}`,
              image: p.image_url,
+             icon: p.icon,
              isDb: true
            }));
            setProducts(mapped);
@@ -65,7 +66,7 @@ export default function Shop() {
     <section className="section shop-page">
       <div className="shop-hero" style={{ marginBottom: '40px' }}>
         <div className="eyebrow">SRIONE Beyond Calculation</div>
-        <h1>Curated energy for <span>the next move.</span></h1>
+        <h1>Curated harmony for <span>the next move.</span></h1>
       </div>
 
       <div className="shop-tools" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', alignItems: 'center', justifyContent: 'space-between', paddingBottom: '30px', borderBottom: '1px solid var(--border-subtle)', marginBottom: '40px' }}>

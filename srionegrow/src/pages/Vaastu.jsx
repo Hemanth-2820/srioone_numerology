@@ -11,7 +11,7 @@ export default function Vaastu() {
         <section className="service-hero">
           <div className="eyebrow">SRIONE / Vaastu</div>
           <h1>Harmonize Your <span>Space.</span></h1>
-          <p className="lead">Vaastu Shastra is the traditional Indian system of architecture. It integrates nature, cosmic energy, and your physical environment to create living and working spaces that naturally promote health, wealth, and profound peace.</p>
+          <p className="lead">Vaastu Shastra is the traditional Indian system of architecture. It integrates nature, cosmic harmony, and your physical environment to create living and working spaces that naturally promote health, wealth, and profound peace.</p>
         </section>
         <section className="service-content">
           <article className="panel">
@@ -21,7 +21,7 @@ export default function Vaastu() {
             <h3 style={{ marginTop: '30px', marginBottom: '15px', fontFamily: 'var(--font-heading)' }}>Our Vaastu Analysis Includes:</h3>
             <ul>
               <li><strong>Directional Alignment:</strong> Ensuring the five elements (Earth, Water, Fire, Air, Space) are perfectly balanced in your floor plan.</li>
-              <li><strong>Energy Flow Optimization:</strong> Removing clutter and structural blockages to allow prana (life force) to flow freely.</li>
+              <li><strong>Harmony Flow Optimization:</strong> Removing clutter and structural blockages to allow prana (life force) to flow freely.</li>
               <li><strong>Remedial Solutions:</strong> We offer simple, practical, and non-destructive remedies (using crystals, colors, and placement) to correct existing Vaastu doshas.</li>
               <li><strong>Workspace Success:</strong> Specific adjustments for offices and shops to attract prosperity and positive client interactions.</li>
             </ul>

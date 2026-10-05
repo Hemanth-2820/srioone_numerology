@@ -2,8 +2,10 @@
 require 'db.php';
 
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') exit(0);
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if (isset($_GET['id'])) {
@@ -18,7 +20,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    $id = $_GET['id'] ?? '';
+    if ($id) {
+        $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
+        $stmt->execute([$id]);
+        echo json_encode(['success' => true, 'message' => 'Product deleted successfully']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Missing ID']);
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = $_POST['id'] ?? '';
     $name = $_POST['name'] ?? '';
     $category = $_POST['category'] ?? '';
     $price = $_POST['price'] ?? '';
@@ -38,11 +52,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     if ($name && $price) {
-        // We will insert description into a new column if they added it, but for now we won't crash if it doesn't exist.
-        // Actually, let's just use the existing 4 columns for DB compatibility and handle rich descriptions in the frontend based on category.
-        $stmt = $conn->prepare("INSERT INTO products (name, category, price, image_url) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$name, $category, $price, $image_url]);
-        echo json_encode(['success' => true, 'message' => 'Product added successfully']);
+        if ($id) {
+            // Update
+            if ($image_url) {
+                $stmt = $conn->prepare("UPDATE products SET name=?, category=?, price=?, image_url=? WHERE id=?");
+                $stmt->execute([$name, $category, $price, $image_url, $id]);
+            } else {
+                $stmt = $conn->prepare("UPDATE products SET name=?, category=?, price=? WHERE id=?");
+                $stmt->execute([$name, $category, $price, $id]);
+            }
+            echo json_encode(['success' => true, 'message' => 'Product updated successfully']);
+        } else {
+            // Insert
+            $stmt = $conn->prepare("INSERT INTO products (name, category, price, image_url) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$name, $category, $price, $image_url]);
+            echo json_encode(['success' => true, 'message' => 'Product added successfully']);
+        }
     } else {
         echo json_encode(['success' => false, 'message' => 'Missing required fields']);
     }

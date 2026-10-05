@@ -1526,7 +1526,7 @@ button {
 
    Numerology (Accent #F4D35E), Vaastu (Accent #8BC34A),
 
-   Crystal Healing (Accent #F4D35E + #8BC34A)
+   Crystal Balancing (Accent #F4D35E + #8BC34A)
 
    ========================================================================== */
 
@@ -1740,7 +1740,7 @@ button {
 
 
 
-/* 3. Crystal Healing */
+/* 3. Crystal Balancing */
 
 .service-crystal .service-mark {
 
@@ -4553,5 +4553,23 @@ li {
     flex-wrap: wrap !important;
     justify-content: center !important;
     gap: 15px !important;
+  }
+}
+
+
+/* ==========================================================================
+   CONTACT PAGE MOBILE RESPONSIVENESS FIXES
+   ========================================================================== */
+.grid-responsive-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+  .grid-responsive-2col {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+    padding: 0 15px !important;
   }
 }

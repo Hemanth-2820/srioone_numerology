@@ -25,6 +25,7 @@ export default function ProductDetail() {
             group: data.category,
             price: data.price.toString().startsWith('₹') || data.price.toString().startsWith('$') ? data.price : `₹${data.price}`,
             image: data.image_url,
+            icon: data.icon,
             isDb: true
           });
         } else {
@@ -83,7 +84,7 @@ export default function ProductDetail() {
              <div style={{ minHeight: '150px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
                {activeTab === 'desc' && (
                  <div>
-                   <p style={{ marginBottom: '10px' }}>This exquisite {product.name} has been meticulously sourced to ensure the highest energetic resonance. Ideal for balancing your space and personal aura.</p>
+                   <p style={{ marginBottom: '10px' }}>This exquisite {product.name} has been meticulously sourced to ensure the highest harmonious resonance. Ideal for balancing your space and personal aura.</p>
                    <ul style={{ paddingLeft: '20px' }}>
                      <li>Premium grade {product.group} quality</li>
                      <li>Hand-selected by SRIONE experts</li>
@@ -100,7 +101,7 @@ export default function ProductDetail() {
                )}
                {activeTab === 'guarantee' && (
                  <div>
-                   <p>At SRIONE, we guarantee the authenticity and purity of all our physical products. Every stone, crystal, and remedy is energetically cleansed prior to shipping.</p>
+                   <p>At SRIONE, we guarantee the authenticity and purity of all our physical products. Every stone, crystal, and remedy is harmoniously cleansed prior to shipping.</p>
                  </div>
                )}
              </div>

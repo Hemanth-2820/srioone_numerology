@@ -35,7 +35,7 @@ export default function Auth() {
         if (action === 'login') {
           // Store user details in localStorage or context in real app
           localStorage.setItem('srione_user', JSON.stringify(data.user));
-          setTimeout(() => navigate('/shop'), 1500);
+          setTimeout(() => window.location.href = '/shop', 1500);
         } else if (action === 'register') {
            setTimeout(() => setView('signin'), 3000);
         }
@@ -46,7 +46,7 @@ export default function Auth() {
       console.log(err);
       // Fallback for local testing when PHP isn't running
       setMessage({ type: 'success', text: `Mock ${action} successful! (PHP backend not detected)` });
-      if (action === 'login') setTimeout(() => navigate('/shop'), 1500);
+      if (action === 'login') setTimeout(() => window.location.href = '/shop', 1500);
     }
     
     setLoading(false);

@@ -21,7 +21,8 @@ CREATE TABLE products (
     description TEXT DEFAULT NULL,
     category VARCHAR(100) NOT NULL,
     price VARCHAR(50) NOT NULL,
-    image_url VARCHAR(255) NOT NULL,
+    image_url VARCHAR(255) DEFAULT NULL,
+    icon VARCHAR(50) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

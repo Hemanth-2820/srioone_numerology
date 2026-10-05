@@ -10,6 +10,7 @@ export default function Admin() {
   const [users, setUsers] = useState([]);
   const [services, setServices] = useState([]);
   const [serviceForm, setServiceForm] = useState({ name: '', mark: '', description: '', link: '/contact', css_class: 'service-numerology' });
+  const [serviceImageFile, setServiceImageFile] = useState(null);
   
   const [formData, setFormData] = useState({ name: '', category: 'Stones', price: '' });
   const [imageFile, setImageFile] = useState(null);
@@ -62,19 +63,52 @@ export default function Admin() {
   };
 
   
+    const handleDeleteProduct = async (id) => {
+    if(!confirm('Are you sure you want to delete this product?')) return;
+    try {
+      await fetch(`${API_URL}/products.php?id=${id}`, { method: 'DELETE' });
+      fetchData();
+    } catch(err) { alert('Failed to delete'); }
+  };
+
+  const handleEditProduct = (product) => {
+    setFormData({ id: product.id, name: product.name, category: product.category, price: product.price });
+  };
+
+  const handleDeleteService = async (id) => {
+    if(!confirm('Are you sure you want to delete this service?')) return;
+    try {
+      await fetch(`${API_URL}/services.php?id=${id}`, { method: 'DELETE' });
+      fetchData();
+    } catch(err) { alert('Failed to delete'); }
+  };
+
+  const handleEditService = (service) => {
+    setServiceForm({ id: service.id, name: service.name, mark: service.mark, description: service.description, link: service.link, css_class: service.css_class });
+  };
+
   const handleUploadService = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('name', serviceForm.name);
+    if (serviceForm.id) formData.append('id', serviceForm.id);
+    formData.append('mark', serviceForm.mark);
+    formData.append('description', serviceForm.description);
+    formData.append('link', serviceForm.link);
+    formData.append('css_class', serviceForm.css_class);
+    if (serviceImageFile) formData.append('image', serviceImageFile);
+
     try {
       const res = await fetch(`${API_URL}/services.php`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(serviceForm)
+        body: formData
       });
       const result = await res.json();
       if(result.success) {
         alert('Service added!');
         fetchData();
         setServiceForm({ name: '', mark: '', description: '', link: '/contact', css_class: 'service-numerology' });
+        setServiceImageFile(null);
       }
     } catch (err) {
       alert('Mock Service Add Success! (PHP not connected)');
@@ -85,6 +119,7 @@ export default function Admin() {
     e.preventDefault();
     const data = new FormData();
     data.append('name', formData.name);
+    if (formData.id) data.append('id', formData.id);
     data.append('category', formData.category);
     data.append('price', formData.price);
     if (imageFile) data.append('image', imageFile);
@@ -95,7 +130,7 @@ export default function Admin() {
       if(result.success) {
         alert('Product uploaded!');
         fetchData(); // Refresh list
-        setFormData({ name: '', category: 'Stones', price: '' });
+        setFormData({ id: null, name: '', category: 'Stones', price: '' });
       }
     } catch (err) {
       alert('Mock Upload Success! (PHP not connected)');
@@ -131,7 +166,7 @@ export default function Admin() {
       {activeTab === 'products' && (
         <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '40px' }}>
           <form onSubmit={handleUpload} style={{ background: 'var(--bg-card)', padding: '24px', borderRadius: 'var(--radius-card)', border: '1px solid var(--border-subtle)', alignSelf: 'start' }}>
-            <h3>Add New Product</h3>
+            <h3>{formData.id ? "Edit Product" : "Add New Product"}</h3>
             <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Product Name</label>
             <input type="text" required value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }} />
             <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Category</label>
@@ -139,7 +174,7 @@ export default function Admin() {
             <datalist id="category-options">
               <option value="Stones" />
               <option value="Bracelets" />
-              <option value="Healing" />
+              <option value="Balancing" />
               <option value="Accessories" />
               <option value="Vaastu" />
             </datalist>
@@ -147,7 +182,7 @@ export default function Admin() {
             <input type="number" required value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }} />
             <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Product Image</label>
             <input type="file" accept="image/*" onChange={e => setImageFile(e.target.files[0])} style={{ width: '100%' }} />
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '24px' }}>Upload Product</button>
+            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '24px' }}>{formData.id ? "Update Product" : "Upload Product"}</button>
           </form>
 
           <div>
@@ -159,6 +194,7 @@ export default function Admin() {
                   <th style={{ padding: '12px', textAlign: 'left' }}>Name</th>
                   <th style={{ padding: '12px', textAlign: 'left' }}>Category</th>
                   <th style={{ padding: '12px', textAlign: 'left' }}>Price</th>
+                  <th style={{ padding: '12px', textAlign: 'left' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -168,6 +204,10 @@ export default function Admin() {
                     <td style={{ padding: '12px', fontWeight: '800' }}>{p.name}</td>
                     <td style={{ padding: '12px' }}>{p.category}</td>
                     <td style={{ padding: '12px' }}>₹{p.price}</td>
+                    <td style={{ padding: '12px' }}>
+                      <button onClick={() => handleEditProduct(p)} style={{marginRight:"5px", padding:"4px 8px", background:"var(--color-pista)", border:"1px solid var(--border-subtle)", borderRadius:"4px", cursor:"pointer", fontWeight:"bold"}}>Edit</button>
+                      <button onClick={() => handleDeleteProduct(p.id)} style={{background:"red", color:"white", padding:"4px 8px", border:"none", borderRadius:"4px", cursor:"pointer", fontWeight:"bold"}}>Del</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -180,7 +220,7 @@ export default function Admin() {
       {activeTab === 'services' && (
         <div style={{ display: 'grid', gridTemplateColumns: '300px 1fr', gap: '40px' }}>
           <form onSubmit={handleUploadService} style={{ background: 'var(--bg-card)', padding: '24px', borderRadius: 'var(--radius-card)', border: '1px solid var(--border-subtle)', alignSelf: 'start' }}>
-            <h3>Add New Service</h3>
+            <h3>{serviceForm.id ? "Edit Service" : "Add New Service"}</h3>
             <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Service Name</label>
             <input type="text" required value={serviceForm.name} onChange={e => setServiceForm({...serviceForm, name: e.target.value})} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }} />
             
@@ -200,6 +240,9 @@ export default function Admin() {
               <option value="service-crystal">Yellow + Green (Crystal)</option>
             </select>
             
+            <label style={{ display: 'block', marginTop: '16px', marginBottom: '8px', fontWeight: '800' }}>Service Image (Optional)</label>
+            <input type="file" accept="image/*" onChange={e => setServiceImageFile(e.target.files[0])} style={{ width: '100%', padding: '10px', borderRadius: '6px', border: '1px solid var(--border-subtle)' }} />
+            
             <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '24px' }}>Add Service</button>
           </form>
 
@@ -211,6 +254,7 @@ export default function Admin() {
                   <th style={{ padding: '12px', textAlign: 'left' }}>Icon</th>
                   <th style={{ padding: '12px', textAlign: 'left' }}>Name</th>
                   <th style={{ padding: '12px', textAlign: 'left' }}>Link</th>
+                  <th style={{ padding: '12px', textAlign: 'left' }}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -219,6 +263,10 @@ export default function Admin() {
                     <td style={{ padding: '12px', fontSize: '1.5rem' }}>{s.mark}</td>
                     <td style={{ padding: '12px', fontWeight: '800' }}>{s.name}</td>
                     <td style={{ padding: '12px' }}>{s.link}</td>
+                    <td style={{ padding: '12px' }}>
+                      <button onClick={() => handleEditService(s)} style={{marginRight:"5px", padding:"4px 8px", background:"var(--color-pista)", border:"1px solid var(--border-subtle)", borderRadius:"4px", cursor:"pointer", fontWeight:"bold"}}>Edit</button>
+                      <button onClick={() => handleDeleteService(s.id)} style={{background:"red", color:"white", padding:"4px 8px", border:"none", borderRadius:"4px", cursor:"pointer", fontWeight:"bold"}}>Del</button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
