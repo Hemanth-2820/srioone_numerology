@@ -4409,3 +4409,149 @@ li {
 .premium-service-card:hover .premium-service-cta .arrow {
   transform: translateX(8px);
 }
+
+
+/* ==========================================================================
+   COMPREHENSIVE MOBILE RESPONSIVENESS FIXES (OVERRIDING DEFAULTS)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  /* Prevent horizontal scrolling globally */
+  html, body, #root, .main-content {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
+  }
+
+  /* Hero Section */
+  .hero-content {
+    padding: 20px !important;
+    width: 100% !important;
+  }
+  .hero-content h1 {
+    font-size: 3rem !important;
+    line-height: 1.1 !important;
+  }
+  .hero-content p {
+    font-size: 1.1rem !important;
+  }
+  
+  /* Grids */
+  .services-grid, .products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding: 0 15px !important;
+  }
+  
+  /* Details Pages */
+  .product-detail-container {
+    flex-direction: column !important;
+    padding: 15px !important;
+  }
+  
+  .product-detail-image-box {
+    min-height: 300px !important;
+    height: 300px !important;
+  }
+
+  /* Topbar / Header */
+  .topbar {
+    flex-direction: column !important;
+    padding: 15px !important;
+    gap: 15px;
+    align-items: center;
+  }
+  
+  .topbar nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .topbar-actions {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* About / Footer Layouts */
+  .about-container, .contact-container, footer {
+    flex-direction: column !important;
+    padding: 20px 15px !important;
+  }
+  
+  .footer-content {
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+
+  /* Generic Padding/Margin */
+  .section-padding {
+    padding: 40px 15px !important;
+  }
+  
+  /* Auth Forms */
+  .auth-box {
+    width: 90% !important;
+    padding: 20px !important;
+  }
+  
+  /* Admin Tables */
+  .admin-table-container {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+  
+  .admin-dashboard {
+    padding: 15px !important;
+  }
+
+  .admin-dashboard .section-padding {
+    padding: 20px 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 2.5rem !important;
+  }
+  .brand {
+    font-size: 1.8rem !important;
+  }
+  .section-tag {
+    font-size: 0.8rem !important;
+  }
+  .service-card-title, .product-card-title {
+    font-size: 1.5rem !important;
+  }
+  .topbar nav a {
+    font-size: 0.9rem !important;
+  }
+}
+
+
+/* ==========================================================================
+   FOOTER MOBILE RESPONSIVENESS FIXES
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .site-footer {
+    padding: 40px 15px 20px !important;
+  }
+  .site-footer > div:first-child {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center;
+    gap: 20px !important;
+  }
+  .footer-bottom div {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 15px !important;
+  }
+}

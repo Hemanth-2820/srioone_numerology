@@ -77,6 +77,6 @@ INSERT INTO products (name, description, price, category, image_url) SELECT '7 c
 /* Seed Default Services */
 /* -------------------------------------------------------- */
 
-INSERT INTO services (name, description, price) SELECT 'Numerology', 'Decode the cosmic blueprint hidden in your numbers.', 1500 FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM services WHERE name = 'Numerology');
-INSERT INTO services (name, description, price) SELECT 'Vaastu Shastra', 'Harmonize your living and working spaces.', 5000 FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM services WHERE name = 'Vaastu Shastra');
-INSERT INTO services (name, description, price) SELECT 'Crystal Healing', 'Restore your internal vibration with ancient crystals.', 2500 FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM services WHERE name = 'Crystal Healing');
+INSERT INTO services (name, mark, description, link, css_class) SELECT 'Numerology', '∞', 'Decode the cosmic blueprint hidden in your numbers.', '/services/numerology', 'service-numerology' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM services WHERE name = 'Numerology');
+INSERT INTO services (name, mark, description, link, css_class) SELECT 'Vaastu Shastra', '⌂', 'Harmonize your living and working spaces.', '/services/vaastu', 'service-vaastu' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM services WHERE name = 'Vaastu Shastra');
+INSERT INTO services (name, mark, description, link, css_class) SELECT 'Crystal Healing', '◇', 'Restore your internal vibration with ancient crystals.', '/services/crystal-healing', 'service-crystal' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM services WHERE name = 'Crystal Healing');
