@@ -1,0 +1,163 @@
+<?php
+require_once __DIR__ . '/db.php';
+
+header("Content-Type: application/json");
+
+$updates = [
+    'Amethyst' => 'Natural deep-violet Amethyst crystal renowned in traditional meditation for soothing an overactive mind, encouraging spiritual contemplation, and enhancing serene sleep.',
+    'Amazonite' => 'Polished blue-green Amazonite stone celebrated for filtering emotional tension, promoting compassionate spoken truth, and restoring balanced harmony to personal spaces.',
+    'Blood stone' => 'Traditional deep forest-green Heliotrope with characteristic red mineral inclusions, traditionally kept on altars for grounding physical vitality and steady courage.',
+    'Red Carnelian' => 'Warm fiery orange-red Carnelian gemstone revered in ancient craft for kindling inner creative motivation, personal confidence, and overcoming spiritual lethargy.',
+    'Cats eye' => 'Chatoyant Cat\'s Eye gemstone (Lehsunia) with its signature luminous band, traditionally honored as a protective talisman shielding personal spaces from unwanted negativity.',
+    'Natural Citrine' => 'Unheated golden-amber Citrine crystal radiating warm solar tones, traditionally kept in business cash registers and home shrines to encourage bright optimism and joyful focus.',
+    'Normal citrine' => 'Bright sunny yellow Citrine crystal ideal for everyday workspace altars, inspiring cheerful lightheartedness, active creative ideas, and sunny positive intention.',
+    'Dhan yog' => 'Handcrafted spiritual combination incorporating traditional prosperity-aligned gemstones and sacred geometry to focus prayers and intentions on auspicious material balance.',
+    'Green avenchurain' => 'Shimmering Green Aventurine mineral with fine mica inclusions, regarded in traditional folk practice as a heart-soothing stone of fortunate optimism and fresh starts.',
+    'Green jade' => 'Smooth olive-green Jade carving representing timeless Eastern ideals of peaceful serenity, enduring purity of heart, and grounded contemplative wisdom.',
+    'Green onyx' => 'Deep emerald-banded Green Onyx stone utilized in classical rituals for grounding scattered thoughts, encouraging self-control, and promoting poised communication.',
+    'Hematite' => 'Dense, reflective gunmetal Hematite mineral known for its grounding physical weight, acting as a sturdy anchor for calming racing thoughts during seated meditation.',
+    'Howlite' => 'Creamy white Howlite with delicate grey web-like veining, known for its tranquil soothing presence on bedside tables to ease mental stress and restless evenings.',
+    'Karungali damru' => 'Sacred miniature Damru hand-turned from authentic dense Karungali (black ebony) wood, representing the rhythmic cosmic pulse of Lord Shiva and spiritual sanctity.',
+    'Karungali rudraksha' => 'Devotional prayer item uniting natural Panchamukhi Rudraksha beads with genuine black ebony wood (Karungali), crafted for daily japa and temple worship.',
+    'Labradorite' => 'Fascinating mineral displaying peacock blue-green iridescent labradorescence when catching the light, cherished by spiritual seekers for inner awakening and aura shielding.',
+    'Lapis' => 'Deep royal celestial blue Lapis Lazuli flecked with natural golden Pyrite specs, used since ancient Egyptian times for deep philosophical insight and universal truth.',
+    'Money magnet' => 'Sacred Vaastu configuration combining energizing green and golden minerals placed in balanced sacred geometry to inspire focused prosperity prayers in workplaces.',
+    'Moonstone' => 'Pearly white Moonstone shimmering with soft blue adularescence, traditionally dedicated to lunar deities for emotional sensitivity, patience, and peaceful new beginnings.',
+    'Pyrite' => 'Natural cubic Golden Pyrite cluster glistening with metallic brassy gold luster, admired on office desks as a symbol of steadfast willpower, masculine resolve, and prosperity.',
+    'Rhodonite' => 'Rich dusty-rose gemstone traced with dark dendritic patterns, traditionally embraced for soothing emotional heartache, fostering forgiveness, and mutual compassion.',
+    'Rose' => 'Delicate natural Rose Quartz in soft pastel blush, universally dedicated to the heart center for nurturing gentle self-acceptance, family affection, and peaceful relationships.',
+    'Sevan chakra' => 'Carefully selected progression of seven genuine mineral beads aligned with traditional yogic energy centers, promoting balanced mindfulness during yoga and prana practices.',
+    'Smokey quartz' => 'Translucent earth-toned Smoky Quartz crystal celebrated for absorbing heavy ambient environmental tension and grounding flighty spiritual energies back to earth.',
+    'Sulemani' => 'Natural banded black and grey Sulemani Akik agate, worn and kept in family shrines for centuries across South Asia as a respected protective shield against evil eye.',
+    'Tiger eye' => 'Golden-brown chatoyant Tiger Eye stone flashing with rich silky bands of light, favored by leaders and decision-makers for practical focus, courage, and discernment.',
+    'Red jespar' => 'Earthy terra-cotta Red Jasper mineral regarded as the supreme nurturer, providing quiet stability, rooted physical grounding, and steady emotional stamina.',
+    'Rodocrosite' => 'Banded raspberry-pink Rhodochrosite crystal known for stimulating heartfelt cheerfulness, healing old emotional wounds, and inviting spontaneous artistic joy.',
+    'zibu keychain' => 'Engraved metallic pocket charm inscribed with angelic Zibu symbols of abundance and light, crafted as a portable devotional companion for daily travel.',
+    'Turquoise' => 'Vibrant sky-blue Turquoise amulet cherished across cultures for centuries as a sacred traveler\'s guardian, fostering clear speech and gentle peace of mind.',
+    'Turquoise high' => 'Collector-grade natural Turquoise showcasing deep uniform robin-egg blue coloration and minimal host rock, hand-selected for high-sanctity meditation spaces.',
+    'Karungali full set (mala bracelet rudraksh, certificate)' => 'Complete sanctified Karungali set featuring a 108-bead ebony wood japa mala, matching wrist bracelet, and consecrated rudraksha with certificate of origin for devout sadhana.',
+    'selenite leaf' => 'Translucent pearlescent Selenite hand-carved in a serene leaf silhouette, designed as an elegant altar charging station for crystal jewelry and sacred rings.',
+    'selenite tower' => 'Towering natural gypsum Selenite spire reflecting soft cathedral light, placed in rooms and entryways to maintain a tranquil, purified spiritual sanctuary atmosphere.',
+    'vastu kit' => 'Comprehensive traditional Vaastu correction package containing consecrated copper remedies, pyramid energizers, and sacred directional yantras for domestic harmony.',
+    'wish box' => 'Finely carved wooden temple prayer box lined with red velvet, used to place handwritten prayer intentions, sacred sankalpas, and spiritual affirmations for divine grace.',
+    'oval money magnet' => 'Polished oval Vaastu crystal plate embedded with prosperity stones and metallic symbols, intended for placement in home lockers, cash drawers, or reception tables.',
+    'tree' => 'Delightful decorative gemstone tree with brass wire branches laden with colorful natural crystal leaves, representing family flourishing, growth, and vibrant auspicious life.',
+    'pure quartz pyramid bracelet' => 'Elastic wrist adornment strung with crystal-clear Quartz beads cut in sacred pyramid facets, designed to clarify conscious thoughts and reflect pure white light.',
+    'zodiac shine coin full set 2' => 'Magnificent ceremonial set of 12 gold-toned commemorative zodiac coins embossed with sacred Vedic astrological glyphs for astrology altars and gifting.',
+    'rashi set' => 'Extensive ceremonial collection containing all twelve planetary rashi stones in fine display packaging, ideal for family puja rooms and astrological remedial rituals.',
+    'Mesha (Aries)' => 'Astrological remedy stone attuned for Aries individuals ruled by Mars (Mangal), designed to channel vigorous dynamic energy into steady, disciplined accomplishments.',
+    'Vrishabha (Taurus)' => 'Venus-ruled devotional stone crafted for Taurus natives, encouraging patient contentment, appreciation of earthly beauty, and financial stability.',
+    'Mithuna (Gemini)' => 'Mercury-governed balancing stone selected for Gemini signs, helping harmonize quick mental agility, communication clarity, and calm emotional balance.',
+    'Karka (Cancer)' => 'Moon-ruled sacred stone attuned for Cancer natives, providing gentle comfort, stabilizing emotional ebbs and flows, and protecting intimate home sanctuaries.',
+    'Simha (Leo)' => 'Solar-aligned gemstone crafted for Leo natives governed by Surya, radiating noble warmth, magnanimous leadership, and genuine spiritual confidence.',
+    'Kanya (Virgo)' => 'Mercury-guided balancing stone tailored for detail-oriented Virgo natives, quieting overthinking tendencies and encouraging peaceful, practical harmony.',
+    'Tula (Libra)' => 'Venus-ruled harmonious stone selected for Libra natives, fostering graceful diplomatic communication, relationship equality, and balanced artistic expression.',
+    'Vrishchika (Scorpio)' => 'Intense transformative stone attuned for Scorpio natives ruled by Mars and Ketu, supporting deep inner resilience, psychic protection, and spiritual renewal.',
+    'Dhanu (Sagittarius)' => 'Jupiter-governed devotional stone formulated for Sagittarius natives, inspiring broad philosophical exploration, virtuous ethics, and cheerful optimism.',
+    'Makara (Capricorn)' => 'Saturn-ruled stabilizing stone crafted for Capricorn natives, supporting unwavering perseverance, disciplined karmic work, and long-term achievement.',
+    'Kumbha (Aquarius)' => 'Innovative Saturn-and-Uranus stone suited for Aquarius natives, stimulating progressive humanitarian thoughts, originality, and open mental vision.',
+    'Meena (Pisces)' => 'Jupiter-guided ethereal stone crafted for Pisces natives, protecting sensitive intuitive empathy, enhancing prayerful contemplation, and calming the spirit.',
+    'Pyrite pen' => 'Professional brass ballpoint pen featuring an upper clear chamber filled with genuine golden pyrite gemstone chips, inspiring mindful business writing.',
+    'green zibu coin' => 'Polished emerald-green talisman coin embossed with ancient angelic Zibu sacred script for prosperity, sized perfectly for wallets and cash boxes.',
+    'mulank bracelet 3 set' => 'Three-piece numerology bracelet suite formulated according to Vedic Mulank birth date principles, harmonizing elemental frequencies across your daily routine.',
+    'selenite plate ruff round' => 'Natural unpolished circular plate of raw white Selenite mineral, utilized on meditation altars to recharge crystal beads and cleanse religious ornaments.',
+    'small pyamid' => 'Precision-cut sacred geometric pyramid crafted to focus directional cosmic prana, neutralize subtle directional doshas, and encourage quiet concentration.',
+    'big pyramid' => 'Large heavy Vaastu pyramid energizer designed for spacious living rooms, office halls, or meditation centres to harmonize structural spatial energy fields.',
+    'dhan yog chain girl bracelet' => 'Dainty, fashionable metallic chain bracelet threaded with blessed Dhan Yog crystal beads, designed for women seeking subtle everyday spiritual balance.',
+    'dhan yog boy chain bracelet' => 'Robust masculine chain bracelet incorporating auspicious Dhan Yog gemstones, styled for modern men seeking focused career perseverance and prosperity.',
+    '2 kg pyrite' => 'Grand collector-weight 2-kilogram sparkling Golden Pyrite mineral specimen, serving as an impressive ornamental centerpiece and symbol of abundance for executive offices.',
+    'rose quartz pendent' => 'Faceted natural pastel Rose Quartz teardrop pendant with metallic bail, worn close to the heart center as a constant reminder of kindness, love, and emotional peace.',
+    'varity natural tumble 10 each' => 'Assorted collection of 10 distinct smooth-tumbled natural mineral gemstones, ideal for learning crystal geology, pocket mindfulness stones, or shrine decoration.',
+    'peacock frame' => 'Traditional spiritual wall frame portraying radiant peacock imagery, revered in ancient Indian architecture for removing household gloom and welcoming auspicious joy.',
+    'pyrite anklet' => 'Delicate, secure ankle chain adorned with shimmering faceted natural Pyrite beads, designed for grounded steps, energetic protection, and subtle elegance.',
+    'vyapar vridji yantra' => 'Sacred geometric brass Yantra consecrated according to Vedic ritual formulas, intended for shop counters, commerce offices, and factories to invite trade blessings.',
+    'kuber pendent' => 'Small consecrated devotional pendant depicting the divine treasurer Lord Kuber, carried as an emblem of financial righteousness, gratitude, and responsible stewardship.',
+    '7 chakra diye' => 'Set of seven color-glazed ceremonial earthen oil lamps (diyas) representing the seven spiritual chakras, illuminating festive pujas with sacred candlelight.',
+    '7 chakra hanger' => 'Vertical hanging decorative charm linking seven genuine raw gemstones along a durable braided cord, suited for hanging near sanctuary windows, balconies, or vehicles.',
+
+];
+
+$specs = [
+    'Amethyst' => ['material' => '100% Natural Violet Amethyst Quartz', 'purpose' => 'Meditation, Altar Display & Mental Calm', 'care' => 'Wipe with dry microfiber cloth; avoid chemical cleaners'],
+    'Amazonite' => ['material' => 'Natural Microcline Feldspar (Amazonite)', 'purpose' => 'Emotional Balance & Gentle Communication', 'care' => 'Gentle rinse with clean water; dry immediately'],
+    'Blood stone' => ['material' => 'Natural Heliotrope Chalcedony with Iron Inclusions', 'purpose' => 'Grounding, Vitality & Traditional Rituals', 'care' => 'Dust lightly; avoid prolonged direct midday sunlight'],
+    'Red Carnelian' => ['material' => 'Natural Orange-Red Chalcedony Agate', 'purpose' => 'Creative Motivation, Focus & Altar Decor', 'care' => 'Wipe clean with soft damp cloth'],
+    'Cats eye' => ['material' => 'Natural Chatoyant Chrysoberyl / Quartz', 'purpose' => 'Traditional Protection Talisman & Ward', 'care' => 'Store separately in provided pouch to prevent surface scratches'],
+    'Natural Citrine' => ['material' => 'Unheated Natural Golden Quartz Mineral', 'purpose' => 'Prosperity Intentions & Solar Energy Focus', 'care' => 'Keep away from high heat; wipe with dry soft cloth'],
+    'Normal citrine' => ['material' => 'Natural Yellow Citrine Quartz', 'purpose' => 'Cheerfulness, Workspace Decor & Optimism', 'care' => 'Clean with mild water; air dry in gentle morning sun'],
+    'Dhan yog' => ['material' => 'Curated Blend of Natural Gemstones & Brass Accents', 'purpose' => 'Vedic Dhan Yog Prosperity Rituals', 'care' => 'Wipe with clean dry cloth after ritual offerings'],
+    'Green avenchurain' => ['material' => 'Natural Green Aventurine Quartz with Mica', 'purpose' => 'Heart Balance, Fresh Beginnings & Optimism', 'care' => 'Rinse under running water periodically; dry thoroughly'],
+    'Green jade' => ['material' => 'Natural Nephrite / Jadeite Mineral', 'purpose' => 'Purity of Heart, Ancient Serenity & Wisdom', 'care' => 'Polish gently with a soft cloth to maintain natural luster'],
+    'Green onyx' => ['material' => 'Natural Banded Green Chalcedony Onyx', 'purpose' => 'Disciplined Focus & Poised Communication', 'care' => 'Avoid contact with harsh detergents or perfumes'],
+    'Hematite' => ['material' => 'Natural Heavy Iron Oxide Mineral (Hematite)', 'purpose' => 'Deep Grounding, Focus & Sitting Meditation', 'care' => 'Keep dry; avoid water exposure to preserve metallic sheen'],
+    'Howlite' => ['material' => 'Natural White Borate Mineral with Veins', 'purpose' => 'Quiet Meditation, Stress Relief & Sleep Space', 'care' => 'Wipe gently; porous stone, avoid soaking in water'],
+    'Karungali damru' => ['material' => '100% Genuine Dense Ebony Wood (Diospyros ebenum)', 'purpose' => 'Shiva Worship, Temple Puja & Spiritual Rhythms', 'care' => 'Apply occasional drops of natural sesame/mustard oil to maintain wood health'],
+    'Karungali rudraksha' => ['material' => 'Natural Black Ebony Wood & 5-Mukhi Rudraksha Bead', 'purpose' => 'Daily Mantra Japa & Spiritual Protection', 'care' => 'Keep away from soap water; oil periodically'],
+    'Labradorite' => ['material' => 'Natural Plagioclase Feldspar with Labradorescence', 'purpose' => 'Aura Shielding, Inner Transformation & Vision', 'care' => 'Wipe with soft cloth; avoid dropping on hard surfaces'],
+    'Lapis' => ['material' => 'Natural Royal Blue Lazurite with Golden Pyrite Specks', 'purpose' => 'Universal Truth, Wisdom & Philosophy', 'care' => 'Clean with dry cloth only; avoid water soaking'],
+    'Money magnet' => ['material' => 'Sacred Combination of Aventurine, Pyrite & Vaastu Plate', 'purpose' => 'Cash Counter, Office Desk & Vaastu Harmony', 'care' => 'Dust regularly; cleanse in gentle sunlight'],
+    'Moonstone' => ['material' => 'Natural Adularia Feldspar with Blue Schiller', 'purpose' => 'Lunar Meditation, Patience & Emotional Calm', 'care' => 'Cleanse under moonlight; handle with care'],
+    'Pyrite' => ['material' => 'Natural Iron Disulfide (Golden Fool\'s Gold)', 'purpose' => 'Willpower, Business Prosperity & Masculine Drive', 'care' => 'Store in a dry location; avoid contact with water'],
+    'Rhodonite' => ['material' => 'Natural Manganese Inosilicate Mineral', 'purpose' => 'Compassion, Forgiveness & Heart Equilibrium', 'care' => 'Wipe clean with a soft dry cloth'],
+    'Rose' => ['material' => '100% Natural Pink Rose Quartz', 'purpose' => 'Heart Center, Unconditional Love & Peace', 'care' => 'Clean with mild lukewarm water; dry in soft shade'],
+    'Sevan chakra' => ['material' => 'Seven Distinct Natural Minerals (Root to Crown)', 'purpose' => 'Chakra Alignment, Yoga Nidra & Meditation', 'care' => 'Cleanse with incense or sage smoke'],
+    'Smokey quartz' => ['material' => 'Natural Earthy Translucent Quartz', 'purpose' => 'Neutralizing Ambient Tension & Earth Grounding', 'care' => 'Rinse with clean water and dry thoroughly'],
+    'Sulemani' => ['material' => 'Natural Banded Black Agate (Sulemani Akik)', 'purpose' => 'Protective Talisman & Planetary Balance', 'care' => 'Wipe clean; keep in soft pouch when traveling'],
+    'Tiger eye' => ['material' => 'Natural Fibrous Quartz with Silky Chatoyancy', 'purpose' => 'Courage, Strategic Focus & Discernment', 'care' => 'Wipe with soft damp cloth; store away from sharp objects'],
+    'Red jespar' => ['material' => 'Natural Microcrystalline Quartz with Iron Oxide', 'purpose' => 'Root Chakra Grounding, Physical Vitality & Fortitude', 'care' => 'Wash with water and dry completely'],
+    'Rodocrosite' => ['material' => 'Natural Manganese Carbonate Gemstone', 'purpose' => 'Inner Child Healing, Joy & Emotional Spontaneity', 'care' => 'Soft stone; handle gently and avoid chemicals'],
+    'zibu keychain' => ['material' => 'High-Grade Engraved Zinc Alloy with Protective Plating', 'purpose' => 'Pocket Angelic Talisman & Daily Companion', 'care' => 'Wipe with dry cloth to maintain polish'],
+    'Turquoise' => ['material' => 'Natural Hydrated Copper-Aluminium Phosphate', 'purpose' => 'Protective Travel Talisman & Gentle Speech', 'care' => 'Keep away from cosmetics and perfumes'],
+    'Turquoise high' => ['material' => 'Collector-Grade High-Purity Natural Turquoise', 'purpose' => 'Sacred Altar Worship & Advanced Meditation', 'care' => 'Do not soak; dust with soft lint-free cloth'],
+    'Karungali full set (mala bracelet rudraksh, certificate)' => ['material' => 'Certified Black Ebony Wood, Natural Rudraksha & Silk Tassel', 'purpose' => 'Traditional Sadhana, 108 Japa Chanting & Blessings', 'care' => 'Maintain wood by massaging occasional natural oil'],
+    'selenite leaf' => ['material' => '100% Natural Gypsum Mineral (Selenite)', 'purpose' => 'Charging Base for Jewelry & Crystal Purification', 'care' => 'NEVER wash with water (water-soluble); dust lightly with dry brush'],
+    'selenite tower' => ['material' => 'Natural Fibrous White Gypsum Spire', 'purpose' => 'Sanctuary Lighting, Aura Clearing & Altar Beacon', 'care' => 'Strictly dry dust only; keep in dry indoor areas'],
+    'vastu kit' => ['material' => 'Consecrated Copper Yantras, Pyramids & Sacred Items', 'purpose' => 'Domestic Directional Vaastu Dosha Correction', 'care' => 'Place as per Vaastu guidelines; keep free of dust'],
+    'wish box' => ['material' => 'Hand-Crafted Natural Seasoned Wood with Brass Latch', 'purpose' => 'Prayer Intention Box & Sankalpa Manifestation', 'care' => 'Wipe with dry flannel cloth'],
+    'oval money magnet' => ['material' => 'Resin-Bonded Natural Mineral Matrix with Copper Coil', 'purpose' => 'Safe Vault, Cash Box & Office Prosperity', 'care' => 'Keep dry inside locker or desk'],
+    'tree' => ['material' => 'Natural Crystal Chips & Flexible Twisted Brass Wire', 'purpose' => 'Auspicious Decorative Bonsai & Family Growth', 'care' => 'Dust branches gently with soft brush'],
+    'pure quartz pyramid bracelet' => ['material' => 'Faceted Clear Quartz Pyramids on Elastic Cord', 'purpose' => 'Mental Clarity & Reflecting Pure Cosmic Light', 'care' => 'Roll gently onto wrist; avoid over-stretching'],
+    'zodiac shine coin full set 2' => ['material' => 'Polished Gold-Electroplated Brass Coins (Set of 12)', 'purpose' => 'Vedic Astrological Study, Puja Offerings & Gifts', 'care' => 'Keep inside display case to prevent oxidation'],
+    'rashi set' => ['material' => '12 Authentic Gemstones Corresponding to Planetary Rashis', 'purpose' => 'Comprehensive Astrological Puja & Remedies', 'care' => 'Keep in original presentation box'],
+    'Pyrite pen' => ['material' => 'Heavy Metallic Pen Barrel with Natural Pyrite Shavings', 'purpose' => 'Executive Writing, Signing Contracts & Focus', 'care' => 'Refill with standard Parker-style ballpoint refills'],
+    'green zibu coin' => ['material' => 'Embossed Enamelled Metal Coin with Velvet Pouch', 'purpose' => 'Wallet Abundance Charm & Altar Token', 'care' => 'Wipe with microfiber cloth'],
+    'mulank bracelet 3 set' => ['material' => 'Triple-Strand Natural Gemstone Beads on Stretch Cord', 'purpose' => 'Numerological Mulank Birth Frequency Alignment', 'care' => 'Roll on wrist carefully; keep away from baths'],
+    'selenite plate ruff round' => ['material' => 'Raw Natural White Selenite Slab', 'purpose' => 'Altar Charging Plate for Gemstones & Pendants', 'care' => 'Do not wet; dust with dry brush only'],
+    'small pyamid' => ['material' => 'Cast Brass and Natural Quartz Crystal Core', 'purpose' => 'Local Space Vaastu Correction & Prana Focus', 'care' => 'Polish brass parts with lemon wipe if needed'],
+    'big pyramid' => ['material' => 'Substantial Heavy Sacred Geometric Brass Pyramid', 'purpose' => 'Commercial Building & Large Living Hall Vaastu', 'care' => 'Dust periodically with microfiber cloth'],
+    'dhan yog chain girl bracelet' => ['material' => 'Gold-Toned Stainless Chain with Natural Dhan Yog Beads', 'purpose' => 'Women\'s Daily Prosperity & Spiritual Charm', 'care' => 'Remove before showering or swimming'],
+    'dhan yog boy chain bracelet' => ['material' => 'Heavy Masculine Stainless Steel Chain with Consecrated Beads', 'purpose' => 'Men\'s Daily Career Drive & Prosperity Charm', 'care' => 'Wipe clean with cloth after sweat or sports'],
+    '2 kg pyrite' => ['material' => '2000g Untreated Natural Golden Pyrite Rough Specimen', 'purpose' => 'Executive Altar Statement & Abundance Symbol', 'care' => 'Handle with both hands; keep completely dry'],
+    'rose quartz pendent' => ['material' => 'Natural Rose Quartz Teardrop with Silver-Tone Bail', 'purpose' => 'Heart-Centered Devotion & Compassion Wear', 'care' => 'Avoid pulling necklace chain; clean stone with damp cloth'],
+    'varity natural tumble 10 each' => ['material' => '10 Distinct Natural Tumbled Minerals (Assorted)', 'purpose' => 'Educational, Altar Offerings & Pocket Talismans', 'care' => 'Safe to rinse in clean water; dry thoroughly'],
+    'peacock frame' => ['material' => 'High-Definition Canvas Print in Ornate Synthetic Frame', 'purpose' => 'Vaastu Wall Display for Harmony & Clearing Gloom', 'care' => 'Wipe glass/frame with standard dry duster'],
+    'pyrite anklet' => ['material' => 'Faceted Pyrite Beads on Durable Reinforced Cord', 'purpose' => 'Lower Chakra Grounding & Everyday Subtle Elegance', 'care' => 'Keep dry; remove before bathing'],
+    'vyapar vridji yantra' => ['material' => 'Heavy Thick-Gauge Embossed Sacred Copper/Brass Sheet', 'purpose' => 'Business Growth, Store Prosperity & Trade Pujas', 'care' => 'Cleanse with sacred water and wipe dry during rituals'],
+    'kuber pendent' => ['material' => 'Gold-Plated Sacred Metal Coin Pendant', 'purpose' => 'Devotional Lord Kuber Blessing for Stewardship', 'care' => 'Wear with clean intent; keep away from harsh perfumes'],
+    '7 chakra diye' => ['material' => 'Set of 7 Glazed Clay Oil Lamps in Rainbow Spectrum', 'purpose' => 'Festive Puja Altar Lighting & Chakra Meditation', 'care' => 'Wash with warm water after oil burn; dry in sun'],
+    '7 chakra hanger' => ['material' => '7 Rough Raw Natural Gemstones Knotted on Cord', 'purpose' => 'Doorway, Meditation Corner & Car Sanctuary Hanger', 'care' => 'Hang securely away from extreme dampness']
+];
+
+// Ensure columns exist
+try { $conn->exec("ALTER TABLE products ADD COLUMN material TEXT DEFAULT NULL"); } catch(Exception $e) {}
+try { $conn->exec("ALTER TABLE products ADD COLUMN purpose TEXT DEFAULT NULL"); } catch(Exception $e) {}
+try { $conn->exec("ALTER TABLE products ADD COLUMN care TEXT DEFAULT NULL"); } catch(Exception $e) {}
+
+$updatedCount = 0;
+$stmt = $conn->prepare("UPDATE products SET description = ?, material = COALESCE(NULLIF(material, ''), ?), purpose = COALESCE(NULLIF(purpose, ''), ?), care = COALESCE(NULLIF(care, ''), ?) WHERE name = ?");
+
+foreach ($updates as $name => $desc) {
+    $mat = isset($specs[$name]) ? $specs[$name]['material'] : '';
+    $pur = isset($specs[$name]) ? $specs[$name]['purpose'] : '';
+    $care = isset($specs[$name]) ? $specs[$name]['care'] : '';
+    if ($stmt->execute([$desc, $mat, $pur, $care, $name])) {
+        $updatedCount++;
+    }
+}
+
+echo json_encode([
+    'success' => true,
+    'message' => "Successfully updated descriptions for $updatedCount products!",
+    'total' => count($updates)
+]);
+?>

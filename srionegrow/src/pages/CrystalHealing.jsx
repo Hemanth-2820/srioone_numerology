@@ -28,9 +28,9 @@ export default function CrystalHealing() {
             <p>Balancing begins the moment your harmony shifts. Allow the ancient wisdom of crystals to ground, protect, and elevate your spirit.</p>
           </article>
           <aside className="panel consultation" style={{ background: 'var(--color-light-peach)' }}>
-            <div className="eyebrow" style={{ color: '#111' }}>Awaken Your Harmony</div>
+            <div className="eyebrow" style={{ color: 'var(--text-primary)' }}>Awaken Your Harmony</div>
             <h2>Book a Crystal Balancing Session.</h2>
-            <p style={{ color: '#111' }}>Experience the deeply restorative power of crystalline harmony. Connect with SRIONE on WhatsApp to book your personalized balancing session.</p>
+            <p style={{ color: 'var(--text-primary)' }}>Experience the deeply restorative power of crystalline harmony. Connect with SRIONE on WhatsApp to book your personalized balancing session.</p>
             <a className="whatsapp-button" href="https://wa.me/919705131915?text=Hello%20SRIONE%2C%20I%20would%20like%20to%20book%20a%20Crystal%20Healing%20session." target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
           </aside>
         </section>

@@ -38,6 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['price'] ?? '';
     $description = $_POST['description'] ?? 'Premium quality SRIONE product, carefully sourced and prepared.';
     
+    $material = $_POST['material'] ?? '';
+    $purpose  = $_POST['purpose'] ?? '';
+    $care     = $_POST['care'] ?? '';
+    
+    // Auto-migrate columns if they don't exist yet
+    try { $conn->exec("ALTER TABLE products ADD COLUMN material TEXT DEFAULT NULL"); } catch(Exception $e) {}
+    try { $conn->exec("ALTER TABLE products ADD COLUMN purpose TEXT DEFAULT NULL"); } catch(Exception $e) {}
+    try { $conn->exec("ALTER TABLE products ADD COLUMN care TEXT DEFAULT NULL"); } catch(Exception $e) {}
+
     $image_url = '';
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = '../uploads/';
@@ -55,17 +64,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($id) {
             // Update
             if ($image_url) {
-                $stmt = $conn->prepare("UPDATE products SET name=?, category=?, price=?, image_url=? WHERE id=?");
-                $stmt->execute([$name, $category, $price, $image_url, $id]);
+                $stmt = $conn->prepare("UPDATE products SET name=?, category=?, price=?, description=?, material=?, purpose=?, care=?, image_url=? WHERE id=?");
+                $stmt->execute([$name, $category, $price, $description, $material, $purpose, $care, $image_url, $id]);
             } else {
-                $stmt = $conn->prepare("UPDATE products SET name=?, category=?, price=? WHERE id=?");
-                $stmt->execute([$name, $category, $price, $id]);
+                $stmt = $conn->prepare("UPDATE products SET name=?, category=?, price=?, description=?, material=?, purpose=?, care=? WHERE id=?");
+                $stmt->execute([$name, $category, $price, $description, $material, $purpose, $care, $id]);
             }
             echo json_encode(['success' => true, 'message' => 'Product updated successfully']);
         } else {
             // Insert
-            $stmt = $conn->prepare("INSERT INTO products (name, category, price, image_url) VALUES (?, ?, ?, ?)");
-            $stmt->execute([$name, $category, $price, $image_url]);
+            $stmt = $conn->prepare("INSERT INTO products (name, category, price, description, material, purpose, care, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$name, $category, $price, $description, $material, $purpose, $care, $image_url]);
             echo json_encode(['success' => true, 'message' => 'Product added successfully']);
         }
     } else {

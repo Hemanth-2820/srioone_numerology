@@ -216,11 +216,11 @@ h1 span {
 .consultation h2 {
   font-size: 1.85rem;
   margin: 12px 0 14px;
-  color: #111111;
+  color: var(--text-primary);
 }
 
 .consultation p {
-  color: #222222;
+  color: var(--text-secondary);
 }
 
 .whatsapp-button {

@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -14,16 +15,26 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Admin from './pages/Admin';
 import Profile from './pages/Profile';
+import PaymentStatus from './pages/PaymentStatus';
 
 import { CartProvider } from './context/CartContext';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 function App() {
   return (
     <CartProvider>
       <Router>
-      <div className="site-shell">
-        <Navbar />
-        <main id="main-content">
+        <ScrollToTop />
+        <div className="site-shell">
+          <Navbar />
+          <main id="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
@@ -37,6 +48,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
+            <Route path="/payment-status" element={<PaymentStatus />} />
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>

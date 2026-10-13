@@ -27,53 +27,60 @@
    ========================================================================== */
 
 :root {
-  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-heading: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* THE 5 CORE COLORS */
-  --color-saffron: #FF9933;
-  --color-lemon: #FFF44F;
-  --color-pista: #C2D6A4;
-  --color-light-green: #90EE90;
-  --color-light-peach: #FFDAB9; 
+  --color-gold: #D4AF37;
+  --color-gold-highlight: #F4D03F;
+  --color-emerald: #0E9F3D;
+  --color-dark-green: #066A2F;
+  --color-navy: #1B2430;
 
   /* SOLID PALETTE MAPPING */
-  --bg-primary: var(--color-light-peach);
-  --bg-secondary: var(--color-pista);
-  --bg-card: var(--color-light-green);
-  --bg-surface-elevated: var(--color-lemon);
-  --bg-surface-active: var(--color-saffron);
-  --bg-emerald: var(--color-light-green);
+  --bg-primary: var(--color-navy);
+  --bg-secondary: #232f3f; 
+  --bg-card: #1f2a38;
+  --bg-surface-elevated: #283648;
+  --bg-surface-active: var(--color-dark-green);
+  --bg-emerald: var(--color-emerald);
 
-  --accent-primary: var(--color-saffron);
-  --accent-primary-hover: var(--color-lemon);
+  --accent-primary: var(--color-gold);
+  --accent-primary-hover: var(--color-gold-highlight);
   --accent-glow: transparent;
-  --accent-surface: var(--color-saffron);
-  --accent-border: var(--color-saffron);
+  --accent-surface: var(--color-gold);
+  --accent-border: var(--color-gold);
 
-  --yellow-accent: var(--color-lemon);
+  --yellow-accent: var(--color-gold-highlight);
   --yellow-glow: transparent;
-  --yellow-surface: var(--color-lemon);
-  --yellow-border: var(--color-lemon);
+  --yellow-surface: var(--color-gold-highlight);
+  --yellow-border: var(--color-gold-highlight);
 
-  --green-accent: var(--color-light-green);
+  --green-accent: var(--color-emerald);
   --green-glow: transparent;
-  --green-surface: var(--color-light-green);
-  --green-border: var(--color-light-green);
+  --green-surface: var(--color-emerald);
+  --green-border: var(--color-emerald);
 
-  --badge-bg: var(--color-lemon);
-  --border-subtle: #111111; 
-  --border-hover: #111111;
+  --badge-bg: var(--color-dark-green);
+  --border-subtle: #2d3c50; 
+  --border-hover: var(--color-gold);
 
-  --text-primary: #111111;
-  --text-secondary: #222222;
-  --text-muted: #444444;
+  --text-primary: #FFFFFF;
+  --text-secondary: #E0E0E0;
+  --text-muted: #A0AAB5;
 
   /* SOLID COLORS INSTEAD OF GRADIENTS */
-  --gradient-signature: var(--color-saffron);
-  --gradient-emerald: var(--color-light-green);
-  --gradient-card: var(--color-pista);
-  --gradient-card-hover: var(--color-pista); /* Removed yellow hover as requested */
+  --gradient-signature: var(--color-gold);
+  --gradient-emerald: var(--color-emerald);
+  --gradient-card: var(--bg-card);
+  --gradient-card-hover: var(--bg-surface-elevated); 
+
+  /* LEGACY VAR MAPPING FOR REACT INLINE STYLES */
+  --color-saffron: var(--color-gold);
+  --color-pista: var(--color-dark-green);
+  --color-lemon: var(--color-gold-highlight);
+  --color-light-green: var(--color-emerald);
+  --color-light-peach: var(--color-navy);
 
   --radius-sm: 8px;
   --radius-btn: 12px;
@@ -86,9 +93,9 @@
   --shadow-btn-glow: none;
   --shadow-btn-hover: none;
 
-  --topbar-bg: var(--color-light-peach);
-  --search-bg: var(--color-pista);
-  --search-border: #111111;
+  --topbar-bg: var(--color-navy);
+  --search-bg: var(--bg-secondary);
+  --search-border: var(--border-subtle);
   --search-text: var(--text-primary);
   --search-placeholder: var(--text-muted);
   --hero-shade: transparent;
@@ -390,7 +397,7 @@ button {
 
 .nav-search:focus-within {
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
   box-shadow: none;
 
@@ -666,7 +673,7 @@ button {
 
   background: var(--green-surface);
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -724,7 +731,7 @@ button {
 
 .nav-links a:hover {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -732,7 +739,7 @@ button {
 
 .nav-links a.active {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -802,7 +809,7 @@ button {
 
 .menu-toggle:hover {
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
 }
 
@@ -846,7 +853,7 @@ button {
 
 .theme-toggle:hover {
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
   color: var(--text-primary);
 
@@ -910,7 +917,7 @@ button {
 
   transform: translateY(-2px);
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
   background: rgba(255, 153, 51, 0.08);
 
@@ -930,7 +937,7 @@ button {
 
   border-color: transparent;
 
-  color: #111111 !important;
+  color: var(--text-primary) !important;
 
   background: var(--gradient-signature);
 
@@ -943,27 +950,16 @@ button {
 
 
 .btn-primary::after {
-
   content: "";
-
   position: absolute;
-
   top: -50%;
-
   left: -80%;
-
   width: 50%;
-
   height: 200%;
-
-  background: var(--color-pista);
-
+  background: rgba(255, 255, 255, 0.4);
   transform: rotate(25deg);
-
   animation: btnGoldenShine 5.5s ease-in-out infinite;
-
   pointer-events: none;
-
 }
 
 
@@ -1017,19 +1013,13 @@ button {
    ========================================================================== */
 
 .hero {
-
   position: relative;
-
   display: flex;
-
   align-items: center;
-
-  min-height: 820px;
-
+  min-height: 100vh;
+  height: 100vh;
   padding: 160px max(24px, calc((100% - 1200px) / 2)) 120px;
-
   overflow: hidden;
-
 }
 
 
@@ -1046,9 +1036,7 @@ button {
 
   object-fit: cover;
 
-  opacity: 0.58;
-
-  filter: saturate(0.85) contrast(1.15);
+  opacity: 0.85;
 
   pointer-events: none;
 
@@ -1057,15 +1045,10 @@ button {
 
 
 .hero-shade {
-
   position: absolute;
-
   inset: 0;
-
-  background: var(--hero-shade);
-
+  background: rgba(15, 23, 36, 0.65);
   pointer-events: none;
-
 }
 
 
@@ -1320,7 +1303,7 @@ button {
 
   gap: 12px;
 
-  color: #111111;
+  color: var(--text-primary);
 
   font-size: 0.74rem;
 
@@ -1384,7 +1367,7 @@ button {
 
 .hero h1 .highlight-yellow {
 
-  color: #111111;
+  color: var(--text-primary);
 
   text-shadow: 0 0 35px var(--yellow-glow);
 
@@ -1660,7 +1643,7 @@ button {
 
   background: var(--color-pista);
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -1668,7 +1651,7 @@ button {
 
 .service-numerology .service-cta {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -1704,7 +1687,7 @@ button {
 
   background: var(--color-pista);
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -1712,7 +1695,7 @@ button {
 
 .service-vaastu .service-cta {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -1748,7 +1731,7 @@ button {
 
   background: var(--color-pista);
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -1756,7 +1739,7 @@ button {
 
 .service-crystal .service-cta {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -1840,7 +1823,7 @@ button {
 
 .contact-band .eyebrow {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -1916,7 +1899,7 @@ button {
 
 .shop-hero .eyebrow {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -1952,7 +1935,7 @@ button {
 
 .shop-hero h1 span {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -2026,7 +2009,7 @@ button {
 
 .filter:hover {
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
   color: var(--text-primary);
 
@@ -2113,7 +2096,7 @@ button {
   border: 1px solid var(--border-subtle);
   border-radius: 14px;
 
-  color: #111111;
+  color: var(--text-primary);
 
   background: var(--color-pista);
 
@@ -2141,7 +2124,7 @@ button {
 
   margin-bottom: 8px;
 
-  color: #111111;
+  color: var(--text-primary);
 
   font-size: 0.68rem;
 
@@ -2231,7 +2214,7 @@ button {
 
 .discount-badge {
 
-  color: #111111;
+  color: var(--text-primary);
 
   font-size: 0.7rem;
 
@@ -2251,7 +2234,7 @@ button {
 
   padding: 3px 8px;
 
-  color: #111111;
+  color: var(--text-primary);
 
   background: var(--green-surface);
 
@@ -2266,29 +2249,17 @@ button {
 
 
 .price {
-
   display: inline-flex;
-
   align-items: center;
-
   border: 1px solid var(--yellow-border);
-
   border-radius: var(--radius-sm);
-
   padding: 4px 10px;
-
-  color: #111111;
-
+  color: var(--color-navy);
   background: var(--yellow-surface);
-
   font-size: 1.05rem;
-
   font-weight: 900;
-
   line-height: 1.1;
-
   letter-spacing: 0.01em;
-
 }
 
 
@@ -2321,9 +2292,9 @@ button {
 
 .enquire:hover {
 
-  color: #111111;
+  color: var(--text-primary);
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
   transform: translateX(2px);
 
@@ -2405,7 +2376,7 @@ button {
 
 .auth-panel .eyebrow {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -2503,9 +2474,9 @@ button {
 
 .auth-tab.active {
 
-  color: #111111;
+  color: var(--text-primary);
 
-  border-bottom-color: #111111;
+  border-bottom-color: var(--text-primary);
 
   text-shadow: 0 0 12px rgba(244, 211, 94, 0.4);
 
@@ -2631,7 +2602,7 @@ body.light-theme .field input[type="time"] {
 
 .field input:focus {
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
   box-shadow: none;
 
@@ -2667,7 +2638,7 @@ body.light-theme .field input[type="time"] {
 
 .auth-switch a {
 
-  color: #111111;
+  color: var(--text-primary);
 
   font-weight: 700;
 
@@ -2679,7 +2650,7 @@ body.light-theme .field input[type="time"] {
 
 .auth-switch a:hover {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -2821,7 +2792,7 @@ body.light-theme .field input[type="time"] {
 
 .footer-column a:hover {
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -3303,7 +3274,7 @@ body.light-theme .field input[type="time"] {
 
   font-size: 7.5rem;
 
-  color: #111111;
+  color: var(--text-primary);
 
   filter: drop-shadow(0 0 28px rgba(244, 211, 94, 0.5));
 
@@ -3413,7 +3384,7 @@ body.light-theme .field input[type="time"] {
 
   font-weight: 900;
 
-  color: #111111;
+  color: var(--text-primary);
 
   text-shadow: 0 0 16px rgba(244, 211, 94, 0.4);
 
@@ -3429,7 +3400,7 @@ body.light-theme .field input[type="time"] {
 
   padding: 4px 10px;
 
-  color: #111111;
+  color: var(--text-primary);
 
   background: var(--green-surface);
 
@@ -3615,7 +3586,7 @@ body.light-theme .field input[type="time"] {
 
 .rashi-option:hover {
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
   background: var(--green-surface);
 
@@ -3677,7 +3648,7 @@ body.light-theme .field input[type="time"] {
 
 .rashi-buy {
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
   color: #FFFFFF;
 
@@ -3699,9 +3670,9 @@ body.light-theme .field input[type="time"] {
 
 .rashi-cart:hover {
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -3711,7 +3682,7 @@ body.light-theme .field input[type="time"] {
 
   flex: 0 0 auto;
 
-  color: #111111;
+  color: var(--text-primary);
 
   font-size: 1.1rem;
 
@@ -3751,9 +3722,9 @@ body.light-theme .field input[type="time"] {
 
 .btn-add-cart:hover {
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
-  color: #111111;
+  color: var(--text-primary);
 
   background: rgba(244, 211, 94, 0.08);
 
@@ -3803,9 +3774,9 @@ body.light-theme .field input[type="time"] {
 
 .cart-btn:hover {
 
-  border-color: #111111;
+  border-color: var(--text-primary);
 
-  color: #111111;
+  color: var(--text-primary);
 
 }
 
@@ -4003,7 +3974,7 @@ body.light-theme .field input[type="time"] {
 
   margin: 0;
 
-  color: #111111;
+  color: var(--text-primary);
 
   font-weight: 800;
 
@@ -4085,7 +4056,7 @@ body.light-theme .field input[type="time"] {
 
 .cart-total-row span:last-child {
 
-  color: #111111;
+  color: var(--text-primary);
 
   font-size: 1.3rem;
 
@@ -4186,7 +4157,7 @@ body.light-theme .field input[type="time"] {
 
 .numerology-particles .num {
   position: absolute;
-  color: #111111;
+  color: var(--text-primary);
   font-family: var(--font-heading);
   font-size: 2rem;
   opacity: 0.2;
@@ -4224,21 +4195,22 @@ body.light-theme .field input[type="time"] {
 }
 
 .hero .btn:not(.btn-primary) {
-  color: #111111 !important;
+  color: var(--text-primary) !important;
   border-color: rgba(255, 255, 255, 0.4) !important;
   background: rgba(255, 255, 255, 0.05) !important;
 }
 
 .hero .btn:not(.btn-primary):hover {
   background: rgba(255, 255, 255, 0.15) !important;
-  border-color: #111111 !important;
-  color: #111111 !important;
+  border-color: var(--text-primary) !important;
+  color: var(--text-primary) !important;
 }
 
 
 
-/* Force dark text on buttons */
-.btn, .btn-primary, .whatsapp-button { color: #111111 !important; }
+/* Button Text Colors */
+.btn-primary { color: var(--color-navy) !important; }
+.btn, .whatsapp-button { color: var(--text-primary) !important; }
 
 /* ==========================================================================
    MOBILE RESPONSIVENESS OVERRIDES
@@ -4372,8 +4344,8 @@ li {
 
 .premium-service-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-  border-color: #111;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  border-color: var(--color-gold-highlight);
 }
 
 .premium-service-icon {
@@ -4384,7 +4356,7 @@ li {
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
-  color: #111;
+  color: var(--color-gold-highlight);
   transition: transform 0.3s ease;
 }
 
@@ -4395,7 +4367,7 @@ li {
 .premium-service-cta {
   margin-top: 30px;
   font-weight: 700;
-  color: #111;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 10px;

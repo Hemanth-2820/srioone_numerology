@@ -30,10 +30,10 @@ export default function Navbar() {
         </nav>
 
         <div className="topbar-actions">
-          <Link className="cart-btn" to="/cart" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', background: 'var(--color-pista)', borderRadius: 'var(--radius-pill)', color: '#111', fontWeight: '700', textDecoration: 'none' }}>
-            🛒 Cart <span className="badge" style={{ background: 'var(--color-saffron)', color: '#111', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem' }}>{cartCount}</span>
+          <Link className="cart-btn" to="/cart" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', background: 'var(--color-pista)', borderRadius: 'var(--radius-pill)', color: 'var(--text-primary)', fontWeight: '700', textDecoration: 'none' }}>
+            🛒 Cart <span className="badge" style={{ background: 'var(--color-saffron)', color: 'var(--text-primary)', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem' }}>{cartCount}</span>
           </Link>
-          {user ? <Link className="btn btn-primary auth-btn" to="/profile" style={{ background: 'var(--color-lemon)', color: '#111' }}>My Account</Link> : <Link className="btn btn-primary auth-btn" to="/auth">Sign In / Sign Up</Link>}
+          {user ? <Link className="btn btn-primary auth-btn" to="/profile" style={{ background: 'var(--color-gold-highlight)', color: 'var(--color-navy)' }}>My Account</Link> : <Link className="btn btn-primary auth-btn" to="/auth" style={{ color: 'var(--color-navy)' }}>Sign In / Sign Up</Link>}
           
           <button className="mobile-menu-btn" onClick={() => setMenuOpen(!menuOpen)} style={{ display: 'none', background: 'none', border: 'none', fontSize: '1.5rem', cursor: 'pointer', padding: '5px' }}>
             {menuOpen ? '✖' : '☰'}

@@ -38,11 +38,14 @@ CREATE TABLE services (
 
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT DEFAULT NULL,
     total_amount DECIMAL(10, 2) NOT NULL,
     status VARCHAR(50) DEFAULT 'Pending',
+    payment_method VARCHAR(50) DEFAULT 'PhonePe',
+    merchant_order_id VARCHAR(100) DEFAULT NULL,
+    gateway_transaction_id VARCHAR(100) DEFAULT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
 INSERT INTO users (name, email, password) VALUES ('Admin User', 'admin@srione.com', 'admin_hash_placeholder');

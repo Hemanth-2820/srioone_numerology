@@ -28,9 +28,9 @@ export default function Numerology() {
             <p>Whether you are facing a crossroads in your career, seeking harmony in relationships, or simply wanting to understand yourself better, our Numerology sessions provide the actionable insights you need.</p>
           </article>
           <aside className="panel consultation" style={{ background: 'var(--color-lemon)' }}>
-            <div className="eyebrow" style={{ color: '#111' }}>Transform Your Life</div>
+            <div className="eyebrow" style={{ color: 'var(--text-primary)' }}>Transform Your Life</div>
             <h2>Book a Numerology Consultation.</h2>
-            <p style={{ color: '#111' }}>Take the first step towards a life of clarity and purpose. Connect with SRIONE directly on WhatsApp to discuss your personalized session.</p>
+            <p style={{ color: 'var(--text-primary)' }}>Take the first step towards a life of clarity and purpose. Connect with SRIONE directly on WhatsApp to discuss your personalized session.</p>
             <a className="whatsapp-button" href="https://wa.me/919705131915?text=Hello%20SRIONE%2C%20I%20would%20like%20to%20book%20a%20Numerology%20consultation." target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
           </aside>
         </section>

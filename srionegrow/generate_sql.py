@@ -32,6 +32,12 @@ if images_match:
     except:
         pass
 
+descriptions = {}
+desc_match = re.search(r"export const productDescriptions = \{(.*?)\};", content, re.DOTALL)
+if desc_match:
+    for m in re.finditer(r'"([^"]+)":\s*"([^"]+)"', desc_match.group(1)):
+        descriptions[m.group(1)] = m.group(2)
+
 sql_statements = []
 sql_statements.append("/* -------------------------------------------------------- */")
 sql_statements.append("/* Run this in phpMyAdmin to seed all your default products */")
@@ -39,6 +45,7 @@ sql_statements.append("/* ------------------------------------------------------
 
 for p in products:
     name = p.get('name', '').replace("'", "''")
+    raw_name = p.get('name', '')
     price_str = re.sub(r"[^0-9.]", "", str(p.get('price', '0')))
     try:
         price = float(price_str)
@@ -46,8 +53,8 @@ for p in products:
         price = 0.0
     
     category = p.get('group', p.get('category', 'Stones')).replace("'", "''")
-    desc = f"Beautiful {name} for {category}".replace("'", "''")
-    image_url = images.get(p.get('name'), '').replace("'", "''")
+    desc = descriptions.get(raw_name, f"Authentic {raw_name} for spiritual balance").replace("'", "''")
+    image_url = images.get(raw_name, '').replace("'", "''")
     
     # Use INSERT IGNORE or check
     sql = f"INSERT INTO products (name, description, price, category, image_url) SELECT '{name}', '{desc}', {price}, '{category}', '{image_url}' FROM DUAL WHERE NOT EXISTS (SELECT 1 FROM products WHERE name = '{name}');"

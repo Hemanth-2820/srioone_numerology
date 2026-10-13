@@ -33,9 +33,11 @@ export default function Auth() {
       if (data.success) {
         setMessage({ type: 'success', text: data.message || 'Success!' });
         if (action === 'login') {
-          // Store user details in localStorage or context in real app
+          // Store user details in localStorage
           localStorage.setItem('srione_user', JSON.stringify(data.user));
-          setTimeout(() => window.location.href = '/shop', 1500);
+          const searchParams = new URLSearchParams(window.location.search);
+          const redirect = searchParams.get('redirect') || '/shop';
+          setTimeout(() => window.location.href = redirect, 1200);
         } else if (action === 'register') {
            setTimeout(() => setView('signin'), 3000);
         }

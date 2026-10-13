@@ -28,9 +28,9 @@ export default function Vaastu() {
             <p>Experience the profound shift when your external environment supports your internal goals. A Vaastu-compliant space is a magnet for abundance and joy.</p>
           </article>
           <aside className="panel consultation" style={{ background: 'var(--color-pista)' }}>
-            <div className="eyebrow" style={{ color: '#111' }}>Elevate Your Space</div>
+            <div className="eyebrow" style={{ color: 'var(--text-primary)' }}>Elevate Your Space</div>
             <h2>Book a Vaastu Consultation.</h2>
-            <p style={{ color: '#111' }}>Ready to align your home or office with the flow of nature? Connect with SRIONE on WhatsApp to schedule your comprehensive Vaastu review.</p>
+            <p style={{ color: 'var(--text-primary)' }}>Ready to align your home or office with the flow of nature? Connect with SRIONE on WhatsApp to schedule your comprehensive Vaastu review.</p>
             <a className="whatsapp-button" href="https://wa.me/919705131915?text=Hello%20SRIONE%2C%20I%20would%20like%20to%20book%20a%20Vaastu%20consultation." target="_blank" rel="noopener noreferrer">Message on WhatsApp</a>
           </aside>
         </section>

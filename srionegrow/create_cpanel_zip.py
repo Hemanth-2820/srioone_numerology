@@ -9,6 +9,10 @@ output_zip = os.path.join(workspace, "srionegrow_cpanel_upload.zip")
 def add_folder_to_zip(zip_file, folder_path, arcname_prefix=""):
     for root, dirs, files in os.walk(folder_path):
         for file in files:
+            # Skip smtp_config.php so we don't overwrite live credentials!
+            if file == "smtp_config.php":
+                continue
+                
             file_path = os.path.join(root, file)
             rel_path = os.path.relpath(file_path, folder_path)
             arcname = os.path.join(arcname_prefix, rel_path)
