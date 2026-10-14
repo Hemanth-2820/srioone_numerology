@@ -55,7 +55,11 @@ export default function Navbar() {
             onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(212, 175, 55, 0.55)'; }}
             onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 14px rgba(212, 175, 55, 0.35)'; }}
           >
-            <span style={{ fontSize: '1.05rem', lineHeight: 1 }}>🛒</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0d1117" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
             <span>CART</span>
             <span style={{ 
               background: '#0d1117', 
