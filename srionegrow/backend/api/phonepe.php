@@ -104,7 +104,7 @@ try {
 }
 
 // ── Step 2: Get OAuth Access Token from PhonePe ───────────────────────────
-$tokenUrl = PHONEPE_BASE_URL . '/v1/oauth/token';
+$tokenUrl = PHONEPE_TOKEN_URL;
 $tokenPayload = http_build_query([
     'client_id'      => PHONEPE_CLIENT_ID,
     'client_version' => PHONEPE_CLIENT_VERSION,

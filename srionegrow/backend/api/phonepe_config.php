@@ -18,6 +18,11 @@ define('PHONEPE_BASE_URL', PHONEPE_TEST_MODE
     ? 'https://api-preprod.phonepe.com/apis/pg-sandbox'
     : 'https://api.phonepe.com/apis/pg');
 
+// PhonePe OAuth Token Endpoint
+define('PHONEPE_TOKEN_URL', PHONEPE_TEST_MODE
+    ? 'https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token'
+    : 'https://api.phonepe.com/apis/identity-manager/v1/oauth/token');
+
 // ---- Your site URL (no trailing slash) ----
 define('SITE_URL', 'https://srionegrow.com');
 
