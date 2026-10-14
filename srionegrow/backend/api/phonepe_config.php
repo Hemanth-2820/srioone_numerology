@@ -8,9 +8,9 @@
 
 define('PHONEPE_TEST_MODE', false);
 
-// ---- TEST Credentials (PhonePe Business Test Mode) ----
-define('PHONEPE_CLIENT_ID',      'M238464VSJRQF_2610130950');
-define('PHONEPE_CLIENT_SECRET',  'NWVlZDk1NTktM2E3NS00OTRiLTljZjgtOWRlMzgzMzM3OThk');
+// ---- PRODUCTION Credentials (PhonePe Business Live Mode) ----
+define('PHONEPE_CLIENT_ID',      'SU2610121823430855554880');
+define('PHONEPE_CLIENT_SECRET',  '0910ad47-0d43-4b80-a7d1-f527e18b7e27');
 define('PHONEPE_CLIENT_VERSION', 1);
 
 // ---- API Base URLs ----
