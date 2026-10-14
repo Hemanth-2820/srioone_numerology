@@ -30,8 +30,39 @@ export default function Navbar() {
         </nav>
 
         <div className="topbar-actions">
-          <Link className="cart-btn" to="/cart" style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 16px', background: 'var(--color-pista)', borderRadius: 'var(--radius-pill)', color: 'var(--text-primary)', fontWeight: '700', textDecoration: 'none' }}>
-            🛒 Cart <span className="badge" style={{ background: 'var(--color-saffron)', color: 'var(--text-primary)', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem' }}>{cartCount}</span>
+          <Link 
+            className="cart-btn" 
+            to="/cart" 
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '8px', 
+              padding: '10px 18px', 
+              background: 'linear-gradient(135deg, #d4af37 0%, #f4d03f 100%)', 
+              borderRadius: 'var(--radius-pill)', 
+              color: '#0d1117', 
+              fontWeight: '800', 
+              textDecoration: 'none',
+              boxShadow: '0 4px 15px rgba(212, 175, 55, 0.35)',
+              border: '1px solid rgba(255, 255, 255, 0.25)',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+            }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(212, 175, 55, 0.5)'; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(212, 175, 55, 0.35)'; }}
+          >
+            <span style={{ fontSize: '1rem' }}>🛒</span>
+            <span style={{ letterSpacing: '0.04em' }}>CART</span>
+            <span className="badge" style={{ 
+              background: '#0d1117', 
+              color: 'var(--color-gold-highlight)', 
+              padding: '2px 8px', 
+              borderRadius: '12px', 
+              fontSize: '0.8rem',
+              fontWeight: '900',
+              marginLeft: '2px'
+            }}>
+              {cartCount}
+            </span>
           </Link>
           {user ? <Link className="btn btn-primary auth-btn" to="/profile" style={{ background: 'var(--color-gold-highlight)', color: 'var(--color-navy)' }}>My Account</Link> : <Link className="btn btn-primary auth-btn" to="/auth" style={{ color: 'var(--color-navy)' }}>Sign In / Sign Up</Link>}
           
