@@ -6,7 +6,7 @@
 // and replace the credentials below with LIVE keys.
 // =============================================
 
-define('PHONEPE_TEST_MODE', true);
+define('PHONEPE_TEST_MODE', false);
 
 // ---- TEST Credentials (PhonePe Business Test Mode) ----
 define('PHONEPE_CLIENT_ID',      'M238464VSJRQF_2610130950');
